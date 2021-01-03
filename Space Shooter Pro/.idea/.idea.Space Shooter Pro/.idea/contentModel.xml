@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\mattd\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\mattd\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_Space Shooter Pro.-347681083.00" t="ExcludeRecursive" />
+    <e p="C:\Users\mattd\Documents\GitHub\2D-game-Development\Space Shooter Pro" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Projects" t="Include">
+          <e p="Tutorials" t="Include">
+            <e p="Starter_Files" t="Include">
+              <e p="2D_Galaxy_Assets" t="Include">
+                <e p="Materials" t="Include">
+                  <e p="Shaders" t="Include">
+                    <e p="Galaxy.shader" t="Include" />
+                  </e>
+                </e>
+              </e>
+            </e>
+          </e>
+        </e>
+        <e p="Scripts" t="Include">
+          <e p="Astroid.cs" t="Include" />
+          <e p="Enemy.cs" t="Include" />
+          <e p="EnemyLaser.cs" t="Include" />
+          <e p="Explosion.cs" t="Include" />
+          <e p="GameManager.cs" t="Include" />
+          <e p="Laser.cs" t="Include" />
+          <e p="Main Menu" t="Include">
+            <e p="MainMenu.cs" t="Include" />
+          </e>
+          <e p="Player.cs" t="Include" />
+          <e p="Powerup.cs" t="Include" />
+          <e p="PowerupID.cs" t="Include" />
+          <e p="SpawnManager.cs" t="Include" />
+          <e p="UIManager.cs" t="Include" />
+        </e>
+      </e>
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Space Shooter Pro.sln" t="IncludeFlat" />
+      <e p="Temp\Bin" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
