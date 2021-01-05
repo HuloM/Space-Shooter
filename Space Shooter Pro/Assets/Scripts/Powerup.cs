@@ -38,6 +38,14 @@ public class Powerup : MonoBehaviour
                         player.OnShieldPickup();
                         Debug.Log("shield collected");
                         break;
+                    case PowerupID.AmmoRefill:
+                        player.OnAmmoRefillPickup();
+                        Debug.Log("shield collected");
+                        break;
+                    case PowerupID.Heal:
+                        player.OnHealPickup();
+                        Debug.Log("shield collected");
+                        break;
                     default:
                         Debug.Log("powerup does not have an ID");
                         break;

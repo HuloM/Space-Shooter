@@ -123,6 +123,11 @@ public class Player : MonoBehaviour
         _lives -= 1;
         _uiManager.UpdateLives(_lives);
 
+        UpdatePlayerHealthVisual();
+    }
+
+    private void UpdatePlayerHealthVisual()
+    {
         switch (_lives)
         {
             case 0:
@@ -134,10 +139,14 @@ public class Player : MonoBehaviour
             case 1:
                 _EngineDamage[1].SetActive(true);
                 break;
-            case 2: 
+            case 2:
+                _EngineDamage[1].SetActive(false);
                 _EngineDamage[0].SetActive(true);
                 break;
-            default: 
+            case 3:
+                _EngineDamage[0].SetActive(false);
+                break;
+            default:
                 Debug.LogError("invalid value reached for player lives");
                 break;
         }
@@ -160,6 +169,23 @@ public class Player : MonoBehaviour
         _shieldStrength = 3;
         _shieldVisual.SetActive(true);
         //StartCoroutine(PowerupPowerDownRoutine(PowerupID.Shield));
+    }
+    public void OnAmmoRefillPickup()
+    {
+        _AmmoCount = 15;
+        _uiManager.UpdatePlayerAmmo(_AmmoCount);
+    }
+
+    public void OnHealPickup()
+    {
+        if (_lives < 3)
+        {
+            ++_lives;
+            _uiManager.UpdateLives(_lives);
+            UpdatePlayerHealthVisual();
+        }
+        else
+            Debug.Log("max lives reached");
     }
 
     IEnumerator PowerupPowerDownRoutine(PowerupID id)
@@ -199,5 +225,5 @@ public class Player : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
-    
+
 }

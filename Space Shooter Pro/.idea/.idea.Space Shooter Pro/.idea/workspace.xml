@@ -29,12 +29,13 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Astroid.cs" />
         <option value="$PROJECT_DIR$/Assets/Explosion.cs" />
         <option value="$PROJECT_DIR$/Assets/PowerupAudio.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Powerup.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/EnemyLaser.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Laser.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Enemy.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UIManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PowerupID.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Powerup.cs" />
       </list>
     </option>
   </component>
@@ -105,7 +106,7 @@
       <workItem from="1609569093815" duration="4443000" />
       <workItem from="1609573804508" duration="140000" />
       <workItem from="1609642025576" duration="1668000" />
-      <workItem from="1609857253314" duration="2049000" />
+      <workItem from="1609857253314" duration="3215000" />
     </task>
     <servers />
   </component>

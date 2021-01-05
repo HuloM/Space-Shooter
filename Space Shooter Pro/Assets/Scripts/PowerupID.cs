@@ -2,5 +2,8 @@
 {
     TripleShot,
     Speed,
-    Shield
+    Shield,
+    AmmoRefill,
+    Heal,
+    
 }
