@@ -217,6 +217,7 @@ RectTransform:
   - {fileID: 954276582}
   - {fileID: 169254821}
   - {fileID: 1299281476}
+  - {fileID: 368638365}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -344,7 +345,6 @@ MonoBehaviour:
   - {fileID: 830605581}
   _explosionPrefab: {fileID: 6056988742329305101, guid: 41ee111ea17ac164cad9d128d77955ec, type: 3}
   _laserShotClip: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
-  _shieldCounter: 0
 --- !u!212 &209506230
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -536,6 +536,85 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &368638364
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 368638365}
+  - component: {fileID: 368638367}
+  - component: {fileID: 368638366}
+  m_Layer: 5
+  m_Name: Ammo Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &368638365
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368638364}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5537290}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 279, y: 44}
+  m_SizeDelta: {x: 160, y: 31.556}
+  m_Pivot: {x: 0, y: 0}
+--- !u!114 &368638366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368638364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 36
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 51
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: New Text
+--- !u!222 &368638367
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368638364}
+  m_CullTransparentMesh: 1
 --- !u!1 &402386667 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8121448019059800863, guid: 50bcc50c701560d408253bfc8a50bd34, type: 3}
@@ -729,7 +808,7 @@ GameObject:
   - component: {fileID: 670713795}
   - component: {fileID: 670713794}
   m_Layer: 0
-  m_Name: SpaceBG_Overlay
+  m_Name: SpaceBG Overlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -971,7 +1050,7 @@ GameObject:
   - component: {fileID: 954276584}
   - component: {fileID: 954276583}
   m_Layer: 5
-  m_Name: Score_Text
+  m_Name: Score Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1292,7 +1371,7 @@ GameObject:
   - component: {fileID: 1299281478}
   - component: {fileID: 1299281477}
   m_Layer: 5
-  m_Name: GameOver_Text
+  m_Name: GameOver Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1780,6 +1859,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9fe6f40efddf0b64fb68a3382b14a4db, type: 3}
   _livesImage: {fileID: 169254819}
   _gameOverText: {fileID: 1299281477}
+  _ammoCountText: {fileID: 368638366}
 --- !u!4 &1591184433
 Transform:
   m_ObjectHideFlags: 0

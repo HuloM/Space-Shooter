@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     private int _shieldStrength;
     private UIManager _uiManager;
     private SpriteRenderer _shieldSpriteRenderer;
+    private int _AmmoCount;
 
     public int Score => _score;
 
@@ -40,19 +41,25 @@ public class Player : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
 
         _audioSource.clip = _laserShotClip;
+        _AmmoCount = 15;
+        
         
         if(_spawnManager == null)
             Debug.LogError("Spawn Manager not found");
         if(_uiManager == null)
             Debug.LogError("UI Manager not found");
+        else
+            _uiManager.UpdatePlayerAmmo(_AmmoCount);
     }
 
     private void Update()
     {
         CalculateMovement(Input.GetKey(KeyCode.LeftShift) ? 2 : 1);
 
-        if (Input.GetKey(KeyCode.Space) && Time.time > _canFire)
+        if (Input.GetKey(KeyCode.Space) && Time.time > _canFire && _AmmoCount > 0)
             FireLaser();
+        
+        
     }
 
     private void ShieldVisual(int shieldStrength)
@@ -101,6 +108,7 @@ public class Player : MonoBehaviour
         else
             Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
         
+        _uiManager.UpdatePlayerAmmo(--_AmmoCount);
         _audioSource.Play();
     }
 
@@ -108,20 +116,19 @@ public class Player : MonoBehaviour
     {
         if (_shieldStrength > 0)
         {
-            _shieldStrength--;
-            ShieldVisual(_shieldStrength);
+            ShieldVisual(--_shieldStrength);
             return;
         }
         
         _lives -= 1;
-        _uiManager.updateLives(_lives);
+        _uiManager.UpdateLives(_lives);
 
         switch (_lives)
         {
             case 0:
                 Instantiate(_explosionPrefab, gameObject.transform.position, Quaternion.identity);
                 _spawnManager.OnPlayerDeath();
-                _uiManager.updateGameOver();
+                _uiManager.UpdateGameOver();
                 Destroy(gameObject, 1f);
                 break;
             case 1:
@@ -179,7 +186,7 @@ public class Player : MonoBehaviour
     public void EnemyHit(int points)
     {
         _score += points;
-        _uiManager.updateScore(_score);
+        _uiManager.UpdateScore(_score);
     }
     
     private void OnTriggerEnter2D(Collider2D other)

@@ -13,12 +13,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Sprite[] _liveSprites;
     [SerializeField] private Image _livesImage;
     [SerializeField] private Text _gameOverText;
+    [SerializeField] private Text _ammoCountText;
 
     private GameManager _gameManager;
     private void Start()
     {
         if (_scoreText == null)
-            Debug.Log("no text component assigned");
+            Debug.LogError("no score text assigned");
         else
             _scoreText.text = "Score: " + 0;
 
@@ -26,20 +27,23 @@ public class UIManager : MonoBehaviour
         
         if(_gameManager == null)
             Debug.LogError("game manager not found");
+        
+        if(_ammoCountText == null)
+            Debug.LogError("no ammo count text assigned");
     }
 
-    public void updateScore(int score)
+    public void UpdateScore(int score)
     {
         _scoreText.text = "Score: " + score;
     }
 
-    public void updateLives(int currentLives)
+    public void UpdateLives(int currentLives)
     {
         if (_livesImage != null)
             _livesImage.sprite = _liveSprites[currentLives];
     }
 
-    public void updateGameOver()
+    public void UpdateGameOver()
     {
         GameOverSequence();
     }
@@ -60,5 +64,10 @@ public class UIManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
             _gameOverText.text = "GAME OVER";
         }
+    }
+
+    public void UpdatePlayerAmmo(int ammo)
+    {
+        _ammoCountText.text = "Ammo : " + ammo;
     }
 }
