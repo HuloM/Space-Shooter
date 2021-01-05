@@ -24,14 +24,17 @@ public class Player : MonoBehaviour
     private float _canFire = -1.0f;
     private float _speedMultiplier = 2f;
     private bool _isTripleShotEnabled = false;
-    private bool _isShieldEnabled = false;
+    private int _shieldStrength;
     private UIManager _uiManager;
+    private SpriteRenderer _shieldSpriteRenderer;
 
     public int Score => _score;
 
     private void Start()
     {
         transform.position = Vector3.zero;
+        
+        _shieldSpriteRenderer = _shieldVisual.GetComponent<SpriteRenderer>();
         _spawnManager = GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<SpawnManager>();
         _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         _audioSource = GetComponent<AudioSource>();
@@ -52,9 +55,27 @@ public class Player : MonoBehaviour
             FireLaser();
     }
 
-    private void EnableShieldVisual()
+    private void ShieldVisual(int shieldStrength)
     {
-        _shieldVisual.SetActive(_isShieldEnabled);
+        switch (shieldStrength)
+        {
+            case 0:
+                _shieldVisual.SetActive(false);
+                break;
+            case 1: 
+                _shieldSpriteRenderer.color = Color.red;
+                break;
+            case 2:
+                _shieldSpriteRenderer.color = Color.magenta;
+                break;
+            case 3:
+                _shieldSpriteRenderer.color = Color.white;
+                break;
+            default:
+                Debug.Log("Invalid Shield Value");
+                break;
+        }
+        
     }
 
     private void CalculateMovement(int speedMultiplier)
@@ -85,12 +106,10 @@ public class Player : MonoBehaviour
 
     public void Damage()
     {
-        //if shield is active do nothing
-        //return
-        if (_isShieldEnabled)
+        if (_shieldStrength > 0)
         {
-            _isShieldEnabled = false;
-            EnableShieldVisual();
+            _shieldStrength--;
+            ShieldVisual(_shieldStrength);
             return;
         }
         
@@ -131,9 +150,9 @@ public class Player : MonoBehaviour
 
     public void OnShieldPickup()
     {
-        _isShieldEnabled = true;
-        EnableShieldVisual();
-        StartCoroutine(PowerupPowerDownRoutine(PowerupID.Shield));
+        _shieldStrength = 3;
+        _shieldVisual.SetActive(true);
+        //StartCoroutine(PowerupPowerDownRoutine(PowerupID.Shield));
     }
 
     IEnumerator PowerupPowerDownRoutine(PowerupID id)
@@ -148,8 +167,8 @@ public class Player : MonoBehaviour
                 _speed /= _speedMultiplier;
                 break;
             case PowerupID.Shield:
-                _isShieldEnabled = false;
-                EnableShieldVisual();
+                _shieldStrength = 0;
+                ShieldVisual(_shieldStrength);
                 break;
             default:
                 Debug.Log("invalid ID");
