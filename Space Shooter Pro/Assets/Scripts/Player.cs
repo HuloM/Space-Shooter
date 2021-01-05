@@ -46,8 +46,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        CalculateMovement();
-        
+        CalculateMovement(Input.GetKey(KeyCode.LeftShift) ? 2 : 1);
+
         if (Input.GetKey(KeyCode.Space) && Time.time > _canFire)
             FireLaser();
     }
@@ -57,13 +57,13 @@ public class Player : MonoBehaviour
         _shieldVisual.SetActive(_isShieldEnabled);
     }
 
-    private void CalculateMovement()
+    private void CalculateMovement(int speedMultiplier)
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
         Vector3 movement = new Vector3(horizontalInput, verticalInput);
-        transform.Translate(movement * (_speed * Time.deltaTime));
+        transform.Translate(movement * (_speed * Time.deltaTime * speedMultiplier));
 
         transform.position = new Vector3(transform.position.x, 
             Mathf.Clamp(transform.position.y, -3.5f, 0.5f));
