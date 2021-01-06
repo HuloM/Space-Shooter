@@ -8,9 +8,11 @@ using Object = UnityEngine.Object;
 [RequireComponent(typeof(AudioSource))]
 public class Player : MonoBehaviour
 {
+    //inspector variables
     [SerializeField] private float _speed = 3.5f;
     [SerializeField] private GameObject _laserPrefab;
     [SerializeField] private GameObject _tripleShotPrefab;
+    [SerializeField] private GameObject _multiShotPrefab;
     [SerializeField] private float _fireRate = 0.5f;
     [SerializeField] private int _lives = 3;
     [SerializeField] private GameObject _shieldVisual;
@@ -18,18 +20,18 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject[] _EngineDamage;
     [SerializeField] private GameObject _explosionPrefab;
     [SerializeField] private AudioClip _laserShotClip;
-
+    
+    //private variables
     private AudioSource _audioSource;
     private SpawnManager _spawnManager;
     private float _canFire = -1.0f;
     private float _speedMultiplier = 2f;
     private bool _isTripleShotEnabled = false;
-    private int _shieldStrength;
+    private bool _isMultiShotEnabled = false;
+    [SerializeField] private int _shieldStrength;
     private UIManager _uiManager;
     private SpriteRenderer _shieldSpriteRenderer;
     private int _AmmoCount;
-
-    public int Score => _score;
 
     private void Start()
     {
@@ -61,30 +63,8 @@ public class Player : MonoBehaviour
         
         
     }
-
-    private void ShieldVisual(int shieldStrength)
-    {
-        switch (shieldStrength)
-        {
-            case 0:
-                _shieldVisual.SetActive(false);
-                break;
-            case 1: 
-                _shieldSpriteRenderer.color = Color.red;
-                break;
-            case 2:
-                _shieldSpriteRenderer.color = Color.magenta;
-                break;
-            case 3:
-                _shieldSpriteRenderer.color = Color.white;
-                break;
-            default:
-                Debug.Log("Invalid Shield Value");
-                break;
-        }
-        
-    }
-
+    
+    //private methods
     private void CalculateMovement(int speedMultiplier)
     {
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -105,27 +85,14 @@ public class Player : MonoBehaviour
         
         if (_isTripleShotEnabled)
             Instantiate(_tripleShotPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
+        else if (_isMultiShotEnabled)
+            Instantiate(_multiShotPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
         else
             Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
         
         _uiManager.UpdatePlayerAmmo(--_AmmoCount);
         _audioSource.Play();
     }
-
-    public void Damage()
-    {
-        if (_shieldStrength > 0)
-        {
-            ShieldVisual(--_shieldStrength);
-            return;
-        }
-        
-        _lives -= 1;
-        _uiManager.UpdateLives(_lives);
-
-        UpdatePlayerHealthVisual();
-    }
-
     private void UpdatePlayerHealthVisual()
     {
         switch (_lives)
@@ -151,23 +118,100 @@ public class Player : MonoBehaviour
                 break;
         }
     }
+    private void UpdateShieldVisual(int shieldStrength)
+    {
+        switch (shieldStrength)
+        {
+            case 0:
+                _shieldVisual.SetActive(false);
+                break;
+            case 1: 
+                _shieldSpriteRenderer.color = Color.red;
+                break;
+            case 2:
+                _shieldSpriteRenderer.color = Color.magenta;
+                break;
+            case 3:
+                _shieldSpriteRenderer.color = Color.white;
+                break;
+            default:
+                Debug.Log("Invalid Shield Value");
+                break;
+        }
+        
+    }
+    private void PowerupToPowerDown(PowerupID id)
+    {
+        switch (id)
+        {
+            case PowerupID.TripleShot:
+                _isTripleShotEnabled = false;
+                break;
+            case PowerupID.MultiShot:
+                _isMultiShotEnabled = false;
+                break;
+            case PowerupID.Speed:
+                _speed /= _speedMultiplier;
+                break;
+            case PowerupID.Shield:
+                _shieldStrength = 0;
+                UpdateShieldVisual(_shieldStrength);
+                break;
+            default:
+                Debug.Log("invalid ID");
+                break;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("hit: " + other.transform.name);
 
+        if (other.CompareTag("EnemyLaser"))
+        {
+            Damage();
+            Destroy(other.gameObject);
+        }
+    }
+    private IEnumerator PowerupPowerDownRoutine(PowerupID id, float secondsToWait)
+    {
+        yield return new WaitForSeconds(secondsToWait);
+        PowerupToPowerDown(id);
+    }
+    
+    //public methods
+    public void EnemyHit(int points)
+    {
+        _score += points;
+        _uiManager.UpdateScore(_score);
+    }
+    public void Damage()
+    {
+        if (_shieldStrength > 0)
+        {
+            UpdateShieldVisual(--_shieldStrength);
+            return;
+        }
+        
+        _lives -= 1;
+        _uiManager.UpdateLives(_lives);
+
+        UpdatePlayerHealthVisual();
+    }
     public void OnTripleShotPickup()
     {
         _isTripleShotEnabled = true;
-        StartCoroutine(PowerupPowerDownRoutine(PowerupID.TripleShot));
+        StartCoroutine(PowerupPowerDownRoutine(PowerupID.TripleShot, 4f));
     }
-
     public void OnSpeedPickup()
     {
         _speed *= _speedMultiplier;
-        StartCoroutine(PowerupPowerDownRoutine(PowerupID.Speed));
+        StartCoroutine(PowerupPowerDownRoutine(PowerupID.Speed, 4f));
     }
-
     public void OnShieldPickup()
     {
         _shieldStrength = 3;
         _shieldVisual.SetActive(true);
+        UpdateShieldVisual(_shieldStrength);
         //StartCoroutine(PowerupPowerDownRoutine(PowerupID.Shield));
     }
     public void OnAmmoRefillPickup()
@@ -175,7 +219,6 @@ public class Player : MonoBehaviour
         _AmmoCount = 15;
         _uiManager.UpdatePlayerAmmo(_AmmoCount);
     }
-
     public void OnHealPickup()
     {
         if (_lives < 3)
@@ -187,43 +230,13 @@ public class Player : MonoBehaviour
         else
             Debug.Log("max lives reached");
     }
-
-    IEnumerator PowerupPowerDownRoutine(PowerupID id)
+    public void OnMultiShotPickup()
     {
-        yield return new WaitForSeconds(4f);
-        switch (id)
-        {
-            case PowerupID.TripleShot:
-                _isTripleShotEnabled = false;
-                break;
-            case PowerupID.Speed:
-                _speed /= _speedMultiplier;
-                break;
-            case PowerupID.Shield:
-                _shieldStrength = 0;
-                ShieldVisual(_shieldStrength);
-                break;
-            default:
-                Debug.Log("invalid ID");
-                break;
-        }
-    }
-
-    public void EnemyHit(int points)
-    {
-        _score += points;
-        _uiManager.UpdateScore(_score);
+        _isMultiShotEnabled = true;
+        StartCoroutine(PowerupPowerDownRoutine(PowerupID.MultiShot, 5f));
     }
     
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log("hit: " + other.transform.name);
 
-        if (other.CompareTag("EnemyLaser"))
-        {
-            Damage();
-            Destroy(other.gameObject);
-        }
-    }
+    
 
 }

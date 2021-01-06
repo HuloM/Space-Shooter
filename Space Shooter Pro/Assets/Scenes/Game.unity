@@ -336,6 +336,7 @@ MonoBehaviour:
   _speed: 3.5
   _laserPrefab: {fileID: 2675369560367996052, guid: a240d454d51ef704ca831fdba94092e5, type: 3}
   _tripleShotPrefab: {fileID: 4368551942459729521, guid: 3506e2b11593d6a4fa0d3d358bb32573, type: 3}
+  _multiShotPrefab: {fileID: 4206182444022753575, guid: 3effb1d995616384ba5268084fed4775, type: 3}
   _fireRate: 0.15
   _lives: 3
   _shieldVisual: {fileID: 402386667}
@@ -345,6 +346,8 @@ MonoBehaviour:
   - {fileID: 830605581}
   _explosionPrefab: {fileID: 6056988742329305101, guid: 41ee111ea17ac164cad9d128d77955ec, type: 3}
   _laserShotClip: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
+  _isTripleShotEnabled: 0
+  _isMultiShotEnabled: 0
 --- !u!212 &209506230
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -672,6 +675,7 @@ MonoBehaviour:
   - {fileID: 6243266774423777941, guid: 4509a6973b8723949970916f6b79069c, type: 3}
   - {fileID: 2320137181448798272, guid: 801fd89dd13362947a1460ffdc87515e, type: 3}
   - {fileID: 9171729468405467113, guid: aa6368c4e3876f74bb92966391375e9b, type: 3}
+  - {fileID: 9046769765907748881, guid: 1105f36976955444caae398515046236, type: 3}
 --- !u!1 &635663072
 GameObject:
   m_ObjectHideFlags: 0

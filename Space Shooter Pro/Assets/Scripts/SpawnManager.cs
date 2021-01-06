@@ -43,7 +43,7 @@ public class SpawnManager : MonoBehaviour
         while (_stopSpawning == false)
         {
             Vector3 posToSpawn = new Vector3(Random.Range(-9.0f, 9.0f), 7f);
-            var randPowerup = Random.Range(0, 3);
+            var randPowerup = Random.Range(0, _powerupPrefabs.Length);
             
             var powerup = Instantiate(_powerupPrefabs[randPowerup], posToSpawn, Quaternion.identity);
             powerup.transform.parent = _enemyContainer.transform;

@@ -5,5 +5,5 @@
     Shield,
     AmmoRefill,
     Heal,
-    
+    MultiShot
 }
