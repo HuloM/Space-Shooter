@@ -134,7 +134,7 @@ public class Player : MonoBehaviour
                 Instantiate(_explosionPrefab, gameObject.transform.position, Quaternion.identity);
                 _spawnManager.OnPlayerDeath();
                 _uiManager.UpdateGameOver();
-                Destroy(gameObject, 1f);
+                Destroy(gameObject);
                 break;
             case 1:
                 _EngineDamage[1].SetActive(true);
