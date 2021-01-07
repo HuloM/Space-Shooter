@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
-using System.Runtime.CompilerServices;
-using NUnit.Framework.Interfaces;
 using UnityEngine;
-using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(AudioSource))]
 public class Player : MonoBehaviour
@@ -24,14 +21,17 @@ public class Player : MonoBehaviour
     //private variables
     private AudioSource _audioSource;
     private SpawnManager _spawnManager;
-    private float _canFire = -1.0f;
-    private float _speedMultiplier = 2f;
-    private bool _isTripleShotEnabled = false;
-    private bool _isMultiShotEnabled = false;
-    [SerializeField] private int _shieldStrength;
     private UIManager _uiManager;
     private SpriteRenderer _shieldSpriteRenderer;
-    private int _AmmoCount;
+    private float _canFire = -1.0f;
+    private float _speedMultiplier = 2f;
+    private float _thrusterFuel;
+    private float _maxThrusterFuel;
+    private bool _isTripleShotEnabled = false;
+    private bool _isMultiShotEnabled = false;
+    private int _shieldStrength;
+    private int _ammoCount;
+
 
     private void Start()
     {
@@ -43,30 +43,37 @@ public class Player : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
 
         _audioSource.clip = _laserShotClip;
-        _AmmoCount = 15;
-        
-        
+        _ammoCount = 15;
+        _maxThrusterFuel = 15;
+        _thrusterFuel = _maxThrusterFuel;
+
         if(_spawnManager == null)
             Debug.LogError("Spawn Manager not found");
         if(_uiManager == null)
             Debug.LogError("UI Manager not found");
         else
-            _uiManager.UpdatePlayerAmmo(_AmmoCount);
+            _uiManager.UpdatePlayerAmmo(_ammoCount);
     }
 
     private void Update()
     {
-        CalculateMovement(Input.GetKey(KeyCode.LeftShift) ? 2 : 1);
+        CalculateMovement(Input.GetKey(KeyCode.LeftShift) && _thrusterFuel > 0? 2 : 1);
 
-        if (Input.GetKey(KeyCode.Space) && Time.time > _canFire && _AmmoCount > 0)
+        if (Input.GetKey(KeyCode.Space) && Time.time > _canFire && _ammoCount > 0)
             FireLaser();
-        
-        
+
+        Refuel();
+
     }
-    
+
     //private methods
     private void CalculateMovement(int speedMultiplier)
     {
+        if (speedMultiplier > 1)
+            _thrusterFuel -= 2f * Time.deltaTime;
+
+        _uiManager.updateThrusterFuel(_thrusterFuel);
+        
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
@@ -90,7 +97,7 @@ public class Player : MonoBehaviour
         else
             Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
         
-        _uiManager.UpdatePlayerAmmo(--_AmmoCount);
+        _uiManager.UpdatePlayerAmmo(--_ammoCount);
         _audioSource.Play();
     }
     private void UpdatePlayerHealthVisual()
@@ -177,7 +184,12 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(secondsToWait);
         PowerupToPowerDown(id);
     }
-    
+    private void Refuel()
+    {
+        if (!Input.GetKey(KeyCode.LeftShift) && _thrusterFuel < _maxThrusterFuel)
+            _thrusterFuel += 1f * Time.deltaTime;
+    }
+
     //public methods
     public void EnemyHit(int points)
     {
@@ -216,8 +228,8 @@ public class Player : MonoBehaviour
     }
     public void OnAmmoRefillPickup()
     {
-        _AmmoCount = 15;
-        _uiManager.UpdatePlayerAmmo(_AmmoCount);
+        _ammoCount = 15;
+        _uiManager.UpdatePlayerAmmo(_ammoCount);
     }
     public void OnHealPickup()
     {
@@ -236,7 +248,7 @@ public class Player : MonoBehaviour
         StartCoroutine(PowerupPowerDownRoutine(PowerupID.MultiShot, 5f));
     }
     
-
+    
     
 
 }

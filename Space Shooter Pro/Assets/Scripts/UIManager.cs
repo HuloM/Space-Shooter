@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image _livesImage;
     [SerializeField] private Text _gameOverText;
     [SerializeField] private Text _ammoCountText;
+    [SerializeField] private Slider _thrusterFuelSlider;
 
     private GameManager _gameManager;
     private void Start()
@@ -30,6 +31,9 @@ public class UIManager : MonoBehaviour
         
         if(_ammoCountText == null)
             Debug.LogError("no ammo count text assigned");
+        
+        if(_thrusterFuelSlider == null)
+            Debug.LogError("no fuel slider assigned");
     }
 
     public void UpdateScore(int score)
@@ -69,5 +73,10 @@ public class UIManager : MonoBehaviour
     public void UpdatePlayerAmmo(int ammo)
     {
         _ammoCountText.text = "Ammo : " + ammo;
+    }
+
+    public void updateThrusterFuel(float fuel)
+    {
+        _thrusterFuelSlider.value = fuel;
     }
 }

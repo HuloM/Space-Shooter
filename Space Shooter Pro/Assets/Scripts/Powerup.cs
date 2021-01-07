@@ -40,18 +40,18 @@ public class Powerup : MonoBehaviour
                         break;
                     case PowerupID.AmmoRefill:
                         player.OnAmmoRefillPickup();
-                        Debug.Log("shield collected");
+                        Debug.Log("ammo refill collected");
                         break;
                     case PowerupID.Heal:
                         player.OnHealPickup();
-                        Debug.Log("shield collected");
+                        Debug.Log("heal collected");
                         break;
                     case PowerupID.MultiShot:
                         player.OnMultiShotPickup();
-                        Debug.Log("shield collected");
+                        Debug.Log("multi shot collected");
                         break;
                     default:
-                        Debug.Log("powerup does not have an ID");
+                        Debug.Log("powerup does not have a valid ID");
                         break;
                 }
                 AudioSource.PlayClipAtPoint(_powerupClip, transform.position);
