@@ -1,9 +1,12 @@
 using System;
 using System.Collections;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
+using Vector3 = UnityEngine.Vector3;
 
 [RequireComponent(typeof(AudioSource))]
 public class Enemy : MonoBehaviour
@@ -17,7 +20,8 @@ public class Enemy : MonoBehaviour
     private AudioSource _audioSource;
     private float _canFire = -1;
     private bool _isHit;
-    
+    private bool _movingRight;
+
     private void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();

@@ -70,9 +70,9 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void UpdatePlayerAmmo(int ammo)
+    public void UpdatePlayerAmmo(int ammo, int maxAmmo)
     {
-        _ammoCountText.text = "Ammo : " + ammo;
+        _ammoCountText.text = "Ammo : " + ammo + "/" + maxAmmo;
     }
 
     public void updateThrusterFuel(float fuel)

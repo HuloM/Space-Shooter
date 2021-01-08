@@ -31,10 +31,12 @@ public class Player : MonoBehaviour
     private bool _isMultiShotEnabled = false;
     private int _shieldStrength;
     private int _ammoCount;
+    private int _maxAmmoCount;
     private Vector3 _cameraInitialPosition;
     private float _shakeMagnitude = 0.05f, _shakeTime = 0.5f;
     private Camera _mainCamera;
 
+    
 
     private void Start()
     {
@@ -47,10 +49,9 @@ public class Player : MonoBehaviour
         _mainCamera = Camera.main;
 
         _audioSource.clip = _laserShotClip;
-        _ammoCount = 15;
-        _maxThrusterFuel = 15;
-        _thrusterFuel = _maxThrusterFuel;
-        
+        _maxAmmoCount = _ammoCount = 15;
+        _maxThrusterFuel = _thrusterFuel = 15;
+
         if(_mainCamera == null)
             Debug.Log("no main camera found");
         else
@@ -61,7 +62,7 @@ public class Player : MonoBehaviour
         if(_uiManager == null)
             Debug.LogError("UI Manager not found");
         else
-            _uiManager.UpdatePlayerAmmo(_ammoCount);
+            _uiManager.UpdatePlayerAmmo(_ammoCount, _maxAmmoCount);
     }
 
     private void Update()
@@ -106,7 +107,7 @@ public class Player : MonoBehaviour
         else
             Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
         
-        _uiManager.UpdatePlayerAmmo(--_ammoCount);
+        _uiManager.UpdatePlayerAmmo(--_ammoCount, _maxAmmoCount);
         _audioSource.Play();
     }
     private void UpdatePlayerHealthVisual()
@@ -256,7 +257,7 @@ public class Player : MonoBehaviour
     public void OnAmmoRefillPickup()
     {
         _ammoCount = 15;
-        _uiManager.UpdatePlayerAmmo(_ammoCount);
+        _uiManager.UpdatePlayerAmmo(_ammoCount, _maxAmmoCount);
     }
     public void OnHealPickup()
     {
