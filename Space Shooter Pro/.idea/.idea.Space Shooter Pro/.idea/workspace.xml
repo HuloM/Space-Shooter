@@ -55,6 +55,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
@@ -108,7 +109,8 @@
       <workItem from="1609642025576" duration="1668000" />
       <workItem from="1609857253314" duration="3962000" />
       <workItem from="1609908825554" duration="3834000" />
-      <workItem from="1609987253357" duration="1502000" />
+      <workItem from="1609987253357" duration="2543000" />
+      <workItem from="1610085226811" duration="1799000" />
     </task>
     <servers />
   </component>
@@ -121,10 +123,10 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="616" y="250" key="run.anything.popup" timestamp="1609465897880">
+    <state x="616" y="250" key="run.anything.popup" timestamp="1610085554081">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="616" y="250" key="run.anything.popup/0.0.1920.1080/-1920.156.1920.1080/1920.-629.1080.1920@0.0.1920.1080" timestamp="1609465897880" />
+    <state x="616" y="250" key="run.anything.popup/0.0.1920.1080/-1920.156.1920.1080/1920.-629.1080.1920@0.0.1920.1080" timestamp="1610085554081" />
     <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1609389346280">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

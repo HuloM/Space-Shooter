@@ -31,6 +31,9 @@ public class Player : MonoBehaviour
     private bool _isMultiShotEnabled = false;
     private int _shieldStrength;
     private int _ammoCount;
+    private Vector3 _cameraInitialPosition;
+    private float _shakeMagnitude = 0.05f, _shakeTime = 0.5f;
+    private Camera _mainCamera;
 
 
     private void Start()
@@ -41,11 +44,17 @@ public class Player : MonoBehaviour
         _spawnManager = GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<SpawnManager>();
         _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         _audioSource = GetComponent<AudioSource>();
+        _mainCamera = Camera.main;
 
         _audioSource.clip = _laserShotClip;
         _ammoCount = 15;
         _maxThrusterFuel = 15;
         _thrusterFuel = _maxThrusterFuel;
+        
+        if(_mainCamera == null)
+            Debug.Log("no main camera found");
+        else
+            _cameraInitialPosition = _mainCamera.transform.position;
 
         if(_spawnManager == null)
             Debug.LogError("Spawn Manager not found");
@@ -189,6 +198,23 @@ public class Player : MonoBehaviour
         if (!Input.GetKey(KeyCode.LeftShift) && _thrusterFuel < _maxThrusterFuel)
             _thrusterFuel += 1f * Time.deltaTime;
     }
+    private void ShakeCamera()
+    {
+        InvokeRepeating(nameof(StartShakeCamera), 0f, 0.005f);
+        Invoke(nameof(StopShakeCamera), _shakeTime);
+    }
+    private void StartShakeCamera()
+    {
+        var transformPosition = _mainCamera.transform.position;
+        transformPosition.x += Random.value * _shakeMagnitude * 2 - _shakeMagnitude;
+        transformPosition.y += Random.value * _shakeMagnitude * 2 - _shakeMagnitude;
+        _mainCamera.transform.position = transformPosition;
+    }
+    private void StopShakeCamera()
+    {
+        CancelInvoke("StartShakeCamera");
+        _mainCamera.transform.position = _cameraInitialPosition;
+    }
 
     //public methods
     public void EnemyHit(int points)
@@ -204,6 +230,7 @@ public class Player : MonoBehaviour
             return;
         }
         
+        ShakeCamera();
         _lives -= 1;
         _uiManager.UpdateLives(_lives);
 
