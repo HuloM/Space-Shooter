@@ -3,6 +3,7 @@ using System.Collections;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
+using TreeEditor;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
@@ -47,9 +48,17 @@ public class Enemy : MonoBehaviour
     private void CalculateMovement()
     {
         transform.Translate(Vector3.down * (_speed * Time.deltaTime));
-
+        StartCoroutine(MoveSideToSide());
+        
+        
         if (transform.position.y < -6.0f)
             transform.position = new Vector3(Random.Range(-9.0f, 9.0f), 7.0f);
+        if(transform.position.x < -9.0f)
+            transform.position = new Vector3(-9.0f, transform.position.y);
+        else if(transform.position.x  > 9.0f)
+            transform.position = new Vector3(9.0f, transform.position.y);
+            
+        
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -79,11 +88,27 @@ public class Enemy : MonoBehaviour
                 _player.EnemyHit(Random.Range(5, 15));
 
             _animator.SetTrigger("OnDestroy");
+            StopCoroutine(MoveSideToSide());
             _speed = 0;
             _audioSource.Play();
             _isHit = true;
             Destroy(GetComponent<Collider2D>());
             Destroy(gameObject, 2.5f);
+        }
+    }
+    IEnumerator MoveSideToSide()
+    {
+        if (_movingRight)
+        {
+            transform.Translate(Vector3.right * (Time.deltaTime * _speed));
+            yield return new WaitForSeconds(0.5f);
+            _movingRight = false;
+        }
+        else
+        {
+            transform.Translate(Vector3.left * (Time.deltaTime * _speed));
+            yield return new WaitForSeconds(0.5f);
+            _movingRight = true;
         }
     }
 }
