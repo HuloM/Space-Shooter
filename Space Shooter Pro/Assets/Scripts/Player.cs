@@ -24,7 +24,6 @@ public class Player : MonoBehaviour
     private UIManager _uiManager;
     private SpriteRenderer _shieldSpriteRenderer;
     private float _canFire = -1.0f;
-    private float _speedMultiplier = 2f;
     private float _thrusterFuel;
     private float _maxThrusterFuel;
     private bool _isTripleShotEnabled = false;
@@ -35,6 +34,7 @@ public class Player : MonoBehaviour
     private Vector3 _cameraInitialPosition;
     private float _shakeMagnitude = 0.05f, _shakeTime = 0.5f;
     private Camera _mainCamera;
+    private float _initialSpeed;
 
     
 
@@ -51,7 +51,8 @@ public class Player : MonoBehaviour
         _audioSource.clip = _laserShotClip;
         _maxAmmoCount = _ammoCount = 15;
         _maxThrusterFuel = _thrusterFuel = 15;
-
+        _initialSpeed = _speed;
+        
         if(_mainCamera == null)
             Debug.Log("no main camera found");
         else
@@ -168,7 +169,7 @@ public class Player : MonoBehaviour
                 _isMultiShotEnabled = false;
                 break;
             case PowerupID.Speed:
-                _speed /= _speedMultiplier;
+                _speed = _initialSpeed;
                 break;
             case PowerupID.Shield:
                 _shieldStrength = 0;
@@ -243,9 +244,9 @@ public class Player : MonoBehaviour
         _isTripleShotEnabled = true;
         StartCoroutine(PowerupPowerDownRoutine(PowerupID.TripleShot, 4f));
     }
-    public void OnSpeedPickup()
+    public void OnSpeedPickup(float speedMultiplier)
     {
-        _speed *= _speedMultiplier;
+        _speed *= speedMultiplier;
         StartCoroutine(PowerupPowerDownRoutine(PowerupID.Speed, 4f));
     }
     public void OnShieldPickup()

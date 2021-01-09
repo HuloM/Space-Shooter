@@ -31,7 +31,7 @@ public class Powerup : MonoBehaviour
                         Debug.Log("triple shot collected");
                         break;
                     case PowerupID.Speed:
-                        player.OnSpeedPickup();
+                        player.OnSpeedPickup(2f);
                         Debug.Log("speed collected");
                         break;
                     case PowerupID.Shield:
@@ -49,6 +49,14 @@ public class Powerup : MonoBehaviour
                     case PowerupID.MultiShot:
                         player.OnMultiShotPickup();
                         Debug.Log("multi shot collected");
+                        break;
+                    case PowerupID.NegativeHeal:
+                        player.Damage();
+                        Debug.Log("negative heal collected");
+                        break;
+                    case PowerupID.NegativeSpeed:
+                        player.OnSpeedPickup(0.5f);
+                        Debug.Log("negative speed collected");
                         break;
                     default:
                         Debug.Log("powerup does not have a valid ID");

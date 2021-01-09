@@ -5,5 +5,7 @@
     Shield,
     AmmoRefill,
     Heal,
-    MultiShot
+    MultiShot,
+    NegativeHeal,
+    NegativeSpeed,
 }
