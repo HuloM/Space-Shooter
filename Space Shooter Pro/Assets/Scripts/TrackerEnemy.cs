@@ -36,10 +36,6 @@ public class TrackerEnemy : MonoBehaviour
     private void CalculateMovement()
     {
         transform.Translate(Vector3.down * (_speed * Time.deltaTime));
-        if (_speed > 0)
-        {
-            transform.position = new Vector3(_player.transform.position.x, transform.position.y);
-        }
 
         if (transform.position.y < -6.0f)
             transform.position = new Vector3(Random.Range(-9.0f, 9.0f), 7.0f);
@@ -89,6 +85,7 @@ public class TrackerEnemy : MonoBehaviour
     {
         while (_speed > 0)
         {
+            transform.position = new Vector3(_player.transform.position.x + Random.Range(-1f,1f), transform.position.y);
             _laserCagePrefab.SetActive(true);
             yield return new WaitForSeconds(1f);
             _laserCagePrefab.SetActive(false);
