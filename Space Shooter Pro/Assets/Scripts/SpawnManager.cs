@@ -11,7 +11,7 @@ public class SpawnManager : MonoBehaviour
     //create a coroutine of type IEnumerator -- yield events
     //while loop 
 
-    [SerializeField] private GameObject _enemyPrefab;
+    [SerializeField] private GameObject[] _enemyPrefabs;
     [SerializeField] private GameObject _enemyContainer;
     [SerializeField] private GameObject[] _powerupPrefabs;
 
@@ -41,7 +41,9 @@ public class SpawnManager : MonoBehaviour
             while (enemiesSpawned < 5 * ((int) _waveIndex + 1))
             {
                 Vector3 posToSpawn = new Vector3(Random.Range(-9.0f, 9.0f), 7f);
-                var enemy = Instantiate(_enemyPrefab, posToSpawn, Quaternion.identity);
+                var randEnemy = Random.Range(0, _enemyPrefabs.Length);
+                
+                var enemy = Instantiate(_enemyPrefabs[randEnemy], posToSpawn, Quaternion.identity);
                 enemy.transform.parent = _enemyContainer.transform;
                 
                 enemiesSpawned++;

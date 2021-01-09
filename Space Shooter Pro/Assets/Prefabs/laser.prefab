@@ -98,6 +98,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 8
+  _isEnemyLaser: 0
+  _isPlayerLaser: 1
 --- !u!61 &2675369560367996059
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -34,6 +34,7 @@
           <e p="Powerup.cs" t="Include" />
           <e p="PowerupID.cs" t="Include" />
           <e p="SpawnManager.cs" t="Include" />
+          <e p="TrackerEnemy.cs" t="Include" />
           <e p="UIManager.cs" t="Include" />
         </e>
       </e>

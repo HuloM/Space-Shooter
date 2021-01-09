@@ -1,20 +1,13 @@
 using System;
 using System.Collections;
-using System.Numerics;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using TreeEditor;
+using System.Collections.Generic;
 using UnityEngine;
-using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
-using Vector3 = UnityEngine.Vector3;
 
-[RequireComponent(typeof(AudioSource))]
-public class Enemy : MonoBehaviour
+public class TrackerEnemy : MonoBehaviour
 {
-
-    [SerializeField] private float _speed = 4.0f;
-    [SerializeField] private GameObject _enemyLaserPrefab;
+    [SerializeField] private float _speed = 1.0f;
+    [SerializeField] private GameObject _laserCagePrefab;
     
     private Player _player;
     private Animator _animator;
@@ -32,38 +25,26 @@ public class Enemy : MonoBehaviour
 
         _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
+        StartCoroutine(CageSequence());
     }
 
     private void Update()
     {
         CalculateMovement();
-
-        if (Time.time > _canFire && !_isHit)
-        {
-            FireLaser();
-        }
-    }
-
-    private void FireLaser()
-    {
-        _canFire = Time.time + Random.Range(3f, 7f);
-        Instantiate(_enemyLaserPrefab, transform.position, Quaternion.identity);
     }
 
     private void CalculateMovement()
     {
         transform.Translate(Vector3.down * (_speed * Time.deltaTime));
-        StartCoroutine(MoveSideToSide());
-        
-        
+        if (_speed > 0)
+        {
+            transform.position = new Vector3(_player.transform.position.x, transform.position.y);
+        }
+
         if (transform.position.y < -6.0f)
             transform.position = new Vector3(Random.Range(-9.0f, 9.0f), 7.0f);
-        if(transform.position.x < -9.0f)
-            transform.position = new Vector3(-9.0f, transform.position.y);
-        else if(transform.position.x  > 9.0f)
-            transform.position = new Vector3(9.0f, transform.position.y);
-            
-        
+
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -96,7 +77,6 @@ public class Enemy : MonoBehaviour
                 _player.EnemyHit(Random.Range(5, 15));
 
             _animator.SetTrigger("OnDestroy");
-            StopCoroutine(MoveSideToSide());
             _speed = 0;
             _audioSource.Play();
             _isHit = true;
@@ -104,19 +84,15 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject, 2.5f);
         }
     }
-    IEnumerator MoveSideToSide()
+
+    IEnumerator CageSequence()
     {
-        if (_movingRight)
+        while (_speed > 0)
         {
-            transform.Translate(Vector3.right * (Time.deltaTime * _speed));
-            yield return new WaitForSeconds(0.5f);
-            _movingRight = false;
-        }
-        else
-        {
-            transform.Translate(Vector3.left * (Time.deltaTime * _speed));
-            yield return new WaitForSeconds(0.5f);
-            _movingRight = true;
+            _laserCagePrefab.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            _laserCagePrefab.SetActive(false);
+            yield return new WaitForSeconds(1f);
         }
     }
 }

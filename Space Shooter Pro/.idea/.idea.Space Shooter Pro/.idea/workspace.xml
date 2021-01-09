@@ -14,6 +14,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Laser.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Astroid.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Enemy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/TrackerEnemy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Powerup.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Main Menu/MainMenu.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/SpawnManager.cs" root0="FORCE_HIGHLIGHTING" />
@@ -29,13 +30,14 @@
         <option value="$PROJECT_DIR$/Assets/Explosion.cs" />
         <option value="$PROJECT_DIR$/Assets/PowerupAudio.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/EnemyLaser.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Laser.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UIManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Enemy.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/SpawnManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PowerupID.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Powerup.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Enemy.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/SpawnManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Laser.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/TrackerEnemy.cs" />
       </list>
     </option>
   </component>
@@ -112,7 +114,7 @@
       <workItem from="1609987253357" duration="2543000" />
       <workItem from="1610085226811" duration="3187000" />
       <workItem from="1610149500685" duration="818000" />
-      <workItem from="1610157363558" duration="3246000" />
+      <workItem from="1610157363558" duration="6246000" />
     </task>
     <servers />
   </component>
