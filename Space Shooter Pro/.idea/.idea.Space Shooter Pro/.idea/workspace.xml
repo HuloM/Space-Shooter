@@ -31,11 +31,11 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/EnemyLaser.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Laser.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PowerupID.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/SpawnManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Powerup.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UIManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Enemy.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/SpawnManager.cs" />
       </list>
     </option>
   </component>
@@ -111,7 +111,8 @@
       <workItem from="1609908825554" duration="3834000" />
       <workItem from="1609987253357" duration="2543000" />
       <workItem from="1610085226811" duration="3187000" />
-      <workItem from="1610149500685" duration="693000" />
+      <workItem from="1610149500685" duration="818000" />
+      <workItem from="1610157363558" duration="2599000" />
     </task>
     <servers />
   </component>

@@ -68,10 +68,13 @@ public class Enemy : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Player player = other.GetComponent<Player>();
-            
-            if(player != null)
+
+            if (player != null)
+            {
                 player.Damage();
-            
+                _player.EnemyHit(Random.Range(5, 15));
+            }
+
             _animator.SetTrigger("OnDestroy");
             _speed = 0;
             _audioSource.Play();

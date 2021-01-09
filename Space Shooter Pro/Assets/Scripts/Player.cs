@@ -221,6 +221,7 @@ public class Player : MonoBehaviour
     public void EnemyHit(int points)
     {
         _score += points;
+        _spawnManager.enemiesKilled++;
         _uiManager.UpdateScore(_score);
     }
     public void Damage()

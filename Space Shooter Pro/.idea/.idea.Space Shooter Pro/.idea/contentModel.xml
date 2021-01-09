@@ -23,6 +23,7 @@
           <e p="Astroid.cs" t="Include" />
           <e p="Enemy.cs" t="Include" />
           <e p="EnemyLaser.cs" t="Include" />
+          <e p="EnemyWaveIndex.cs" t="Include" />
           <e p="Explosion.cs" t="Include" />
           <e p="GameManager.cs" t="Include" />
           <e p="Laser.cs" t="Include" />
