@@ -15,6 +15,9 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private float _speed = 4.0f;
     [SerializeField] private GameObject _enemyLaserPrefab;
+    [SerializeField] private GameObject _enemyShield;
+
+    private const int SpawnShieldChance = 33;
     
     private Player _player;
     private Animator _animator;
@@ -22,6 +25,7 @@ public class Enemy : MonoBehaviour
     private float _canFire = -1;
     private bool _isHit;
     private bool _movingRight;
+    private bool _hasShield;
 
     private void Start()
     {
@@ -32,6 +36,8 @@ public class Enemy : MonoBehaviour
 
         _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
+
+        RandomSpawnShield();
     }
 
     private void Update()
@@ -49,7 +55,6 @@ public class Enemy : MonoBehaviour
         _canFire = Time.time + Random.Range(3f, 7f);
         Instantiate(_enemyLaserPrefab, transform.position, Quaternion.identity);
     }
-
     private void CalculateMovement()
     {
         transform.Translate(Vector3.down * (_speed * Time.deltaTime));
@@ -66,6 +71,17 @@ public class Enemy : MonoBehaviour
         
     }
 
+    private void RandomSpawnShield()
+    {
+        var randShieldSpawn = Random.Range(0, 100);
+
+        if (randShieldSpawn <= SpawnShieldChance)
+        {
+            _hasShield = true;
+            _enemyShield.SetActive(true);
+        }
+    }
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("hit: " + other.transform.name);
@@ -75,11 +91,18 @@ public class Enemy : MonoBehaviour
             Player player = other.GetComponent<Player>();
 
             if (player != null)
-            {
                 player.Damage();
-                _player.EnemyHit(Random.Range(5, 15));
-            }
 
+            if (_hasShield)
+            {
+                _hasShield = false;
+                _enemyShield.SetActive(false);
+                return;
+            }
+            
+            if (player != null)
+                _player.EnemyHit(Random.Range(5, 15));
+            
             _animator.SetTrigger("OnDestroy");
             _speed = 0;
             _audioSource.Play();
@@ -92,9 +115,17 @@ public class Enemy : MonoBehaviour
         {
             Destroy(other.gameObject);
             
+
+            if (_hasShield)
+            {
+                _hasShield = false;
+                _enemyShield.SetActive(false);
+                return;
+            }
+            
             if(_player != null)
                 _player.EnemyHit(Random.Range(5, 15));
-
+            
             _animator.SetTrigger("OnDestroy");
             StopCoroutine(MoveSideToSide());
             _speed = 0;
@@ -104,7 +135,7 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject, 2.5f);
         }
     }
-    IEnumerator MoveSideToSide()
+    private IEnumerator MoveSideToSide()
     {
         if (_movingRight)
         {

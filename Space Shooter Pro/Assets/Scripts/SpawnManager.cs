@@ -27,8 +27,8 @@ public class SpawnManager : MonoBehaviour
         13, //13 for triple shot    index = 2
         12, //12 for shield         index = 3
         10, //10 for half speed     index = 4
-        7,   //7 for heal           index = 5
-        8,   //8 for multi shot     index = 6
+        8,   //8 for heal           index = 5
+        7,   //7 for multi shot     index = 6
         5    //5 for damage         index = 7
     };
 

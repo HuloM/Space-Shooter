@@ -8,6 +8,9 @@ public class TrackerEnemy : MonoBehaviour
 {
     [SerializeField] private float _speed = 1.0f;
     [SerializeField] private GameObject _laserCagePrefab;
+    [SerializeField] private GameObject _enemyShield;
+    
+    private const int SpawnShieldChance = 33;
     
     private Player _player;
     private Animator _animator;
@@ -15,6 +18,7 @@ public class TrackerEnemy : MonoBehaviour
     private float _canFire = -1;
     private bool _isHit;
     private bool _movingRight;
+    private bool _hasShield;
 
     private void Start()
     {
@@ -26,6 +30,8 @@ public class TrackerEnemy : MonoBehaviour
         _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
         StartCoroutine(CageSequence());
+        
+        RandomSpawnShield();
     }
 
     private void Update()
@@ -43,6 +49,17 @@ public class TrackerEnemy : MonoBehaviour
 
     }
 
+    private void RandomSpawnShield()
+    {
+        var randShieldSpawn = Random.Range(0, 100);
+
+        if (randShieldSpawn <= SpawnShieldChance)
+        {
+            _hasShield = true;
+            _enemyShield.SetActive(true);
+        }
+    }
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("hit: " + other.transform.name);
@@ -52,11 +69,17 @@ public class TrackerEnemy : MonoBehaviour
             Player player = other.GetComponent<Player>();
 
             if (player != null)
-            {
                 player.Damage();
-                _player.EnemyHit(Random.Range(5, 15));
+
+            if (_hasShield)
+            {
+                _hasShield = false;
+                _enemyShield.SetActive(false);
+                return;
             }
 
+            if (player != null)
+                _player.EnemyHit(Random.Range(5, 15));
             _animator.SetTrigger("OnDestroy");
             _speed = 0;
             _audioSource.Play();
@@ -69,9 +92,17 @@ public class TrackerEnemy : MonoBehaviour
         {
             Destroy(other.gameObject);
             
+            if (_hasShield)
+            {
+                _hasShield = false;
+                _enemyShield.SetActive(false);
+                return;
+            }
+            
             if(_player != null)
                 _player.EnemyHit(Random.Range(5, 15));
 
+            
             _animator.SetTrigger("OnDestroy");
             _speed = 0;
             _audioSource.Play();
