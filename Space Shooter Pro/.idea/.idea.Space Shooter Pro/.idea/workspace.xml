@@ -35,9 +35,9 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Powerup.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Enemy.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/SpawnManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Laser.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/TrackerEnemy.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/SpawnManager.cs" />
       </list>
     </option>
   </component>
@@ -114,7 +114,9 @@
       <workItem from="1609987253357" duration="2543000" />
       <workItem from="1610085226811" duration="3187000" />
       <workItem from="1610149500685" duration="818000" />
-      <workItem from="1610157363558" duration="6246000" />
+      <workItem from="1610157363558" duration="7025000" />
+      <workItem from="1610250914342" duration="3779000" />
+      <workItem from="1610335010749" duration="1672000" />
     </task>
     <servers />
   </component>
@@ -131,9 +133,9 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="616" y="250" key="run.anything.popup/0.0.1920.1080/-1920.156.1920.1080/1920.-629.1080.1920@0.0.1920.1080" timestamp="1610085554081" />
-    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1609389346280">
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1610335324328">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/-1920.156.1920.1080/1920.-629.1080.1920@0.0.1920.1080" timestamp="1609389346280" />
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/-1920.156.1920.1080/1920.-629.1080.1920@0.0.1920.1080" timestamp="1610335324328" />
   </component>
 </project>
