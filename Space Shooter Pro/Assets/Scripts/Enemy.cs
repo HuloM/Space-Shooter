@@ -1,13 +1,5 @@
-using System;
 using System.Collections;
-using System.Numerics;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using TreeEditor;
 using UnityEngine;
-using Quaternion = UnityEngine.Quaternion;
-using Random = UnityEngine.Random;
-using Vector3 = UnityEngine.Vector3;
 
 [RequireComponent(typeof(AudioSource))]
 public class Enemy : MonoBehaviour
@@ -67,8 +59,6 @@ public class Enemy : MonoBehaviour
             transform.position = new Vector3(-9.0f, transform.position.y);
         else if(transform.position.x  > 9.0f)
             transform.position = new Vector3(9.0f, transform.position.y);
-            
-        
     }
 
     private void RandomSpawnShield()
@@ -85,7 +75,7 @@ public class Enemy : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("hit: " + other.transform.name);
-        
+
         if (other.CompareTag("Player"))
         {
             Player player = other.GetComponent<Player>();
@@ -100,21 +90,13 @@ public class Enemy : MonoBehaviour
                 return;
             }
             
-            if (player != null)
-                _player.EnemyHit(Random.Range(5, 15));
-            
-            _animator.SetTrigger("OnDestroy");
-            _speed = 0;
-            _audioSource.Play();
-            _isHit = true;
-            Destroy(GetComponent<Collider2D>());
-            Destroy(gameObject, 2.5f);
+            if(player != null)
+                OnEnemyHit();
         }
         
         if (other.CompareTag("Laser"))
         {
             Destroy(other.gameObject);
-            
 
             if (_hasShield)
             {
@@ -123,17 +105,19 @@ public class Enemy : MonoBehaviour
                 return;
             }
             
-            if(_player != null)
-                _player.EnemyHit(Random.Range(5, 15));
-            
-            _animator.SetTrigger("OnDestroy");
-            StopCoroutine(MoveSideToSide());
-            _speed = 0;
-            _audioSource.Play();
-            _isHit = true;
-            Destroy(GetComponent<Collider2D>());
-            Destroy(gameObject, 2.5f);
+            OnEnemyHit();
         }
+    }
+
+    private void OnEnemyHit()
+    {
+        _player.EnemyHit(Random.Range(5, 15));
+        _animator.SetTrigger("OnDestroy");
+        _speed = 0;
+        _audioSource.Play();
+        _isHit = true;
+        Destroy(GetComponent<Collider2D>());
+        Destroy(gameObject, 2.5f);
     }
     private IEnumerator MoveSideToSide()
     {

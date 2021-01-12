@@ -1,9 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
-
 public class TrackerEnemy : MonoBehaviour
 {
     [SerializeField] private float _speed = 1.0f;
@@ -15,9 +11,6 @@ public class TrackerEnemy : MonoBehaviour
     private Player _player;
     private Animator _animator;
     private AudioSource _audioSource;
-    private float _canFire = -1;
-    private bool _isHit;
-    private bool _movingRight;
     private bool _hasShield;
 
     private void Start()
@@ -29,9 +22,9 @@ public class TrackerEnemy : MonoBehaviour
 
         _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
-        StartCoroutine(CageSequence());
         
         RandomSpawnShield();
+        StartCoroutine(CageSequence());
     }
 
     private void Update()
@@ -45,8 +38,6 @@ public class TrackerEnemy : MonoBehaviour
 
         if (transform.position.y < -6.0f)
             transform.position = new Vector3(Random.Range(-9.0f, 9.0f), 7.0f);
-
-
     }
 
     private void RandomSpawnShield()
@@ -58,69 +49,57 @@ public class TrackerEnemy : MonoBehaviour
             _hasShield = true;
             _enemyShield.SetActive(true);
         }
+        else
+            _hasShield = false;
     }
     
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("hit: " + other.transform.name);
-        
+
         if (other.CompareTag("Player"))
         {
             Player player = other.GetComponent<Player>();
 
             if (player != null)
-                player.Damage();
-
-            if (_hasShield)
             {
-                _hasShield = false;
-                _enemyShield.SetActive(false);
-                return;
+                player.Damage();
+                OnEnemyHit();
             }
-
-            if (player != null)
-                _player.EnemyHit(Random.Range(5, 15));
-            _animator.SetTrigger("OnDestroy");
-            _speed = 0;
-            _audioSource.Play();
-            _isHit = true;
-            Destroy(GetComponent<Collider2D>());
-            Destroy(gameObject, 2.5f);
         }
-        
+
         if (other.CompareTag("Laser"))
         {
             Destroy(other.gameObject);
-            
-            if (_hasShield)
-            {
-                _hasShield = false;
-                _enemyShield.SetActive(false);
-                return;
-            }
-            
-            if(_player != null)
-                _player.EnemyHit(Random.Range(5, 15));
 
-            
-            _animator.SetTrigger("OnDestroy");
-            _speed = 0;
-            _audioSource.Play();
-            _isHit = true;
-            Destroy(GetComponent<Collider2D>());
-            Destroy(gameObject, 2.5f);
+            OnEnemyHit();
         }
     }
 
-    IEnumerator CageSequence()
+    private void OnEnemyHit()
+    {
+        if (_hasShield)
+        {
+            _hasShield = false;
+            _enemyShield.SetActive(false);
+            return;
+        }
+        _player.EnemyHit(Random.Range(5, 15));
+        _laserCagePrefab.SetActive(false);
+        _animator.SetTrigger("OnDestroy");
+        _speed = 0;
+        _audioSource.Play();
+        Destroy(GetComponent<Collider2D>());
+        Destroy(gameObject, 2.5f);
+    }
+
+    private IEnumerator CageSequence()
     {
         while (_speed > 0)
         {
-            transform.position = new Vector3(_player.transform.position.x + Random.Range(-1f,1f), transform.position.y);
-            _laserCagePrefab.SetActive(true);
-            yield return new WaitForSeconds(1f);
-            _laserCagePrefab.SetActive(false);
-            yield return new WaitForSeconds(1f);
+            var direction = new Vector3(_player.transform.position.x - Random.Range(-1f,1f),transform.position.y);
+            transform.position = direction;
+            yield return new WaitForSeconds(0.2f);
         }
     }
 }

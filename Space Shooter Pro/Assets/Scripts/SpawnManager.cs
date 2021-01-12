@@ -1,9 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Object = UnityEngine.Object;
-using Random = UnityEngine.Random;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -36,6 +32,7 @@ public class SpawnManager : MonoBehaviour
     
     public void StartSpawnSequence()
     {
+        _waveIndex = EnemyWaveIndex.wave01; 
         StartCoroutine(SpawnEnemyRoutine());
         StartCoroutine(SpawnPowerupRoutine());
     }

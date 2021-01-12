@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(AudioSource))]
 public class Player : MonoBehaviour
@@ -23,18 +22,16 @@ public class Player : MonoBehaviour
     private SpawnManager _spawnManager;
     private UIManager _uiManager;
     private SpriteRenderer _shieldSpriteRenderer;
+    private CameraShake _cameraShake;
     private float _canFire = -1.0f;
     private float _thrusterFuel;
     private float _maxThrusterFuel;
+    private float _initialSpeed;
     private bool _isTripleShotEnabled = false;
     private bool _isMultiShotEnabled = false;
     private int _shieldStrength;
     private int _ammoCount;
     private int _maxAmmoCount;
-    private Vector3 _cameraInitialPosition;
-    private float _shakeMagnitude = 0.05f, _shakeTime = 0.5f;
-    private Camera _mainCamera;
-    private float _initialSpeed;
 
     
 
@@ -46,18 +43,15 @@ public class Player : MonoBehaviour
         _spawnManager = GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<SpawnManager>();
         _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         _audioSource = GetComponent<AudioSource>();
-        _mainCamera = Camera.main;
+        _cameraShake = Camera.main.GetComponent<CameraShake>();
 
         _audioSource.clip = _laserShotClip;
         _maxAmmoCount = _ammoCount = 15;
         _maxThrusterFuel = _thrusterFuel = 15;
-        _initialSpeed = _speed;
-        
-        if(_mainCamera == null)
-            Debug.Log("no main camera found");
-        else
-            _cameraInitialPosition = _mainCamera.transform.position;
+        _initialSpeed = _speed = 3.5f;
 
+        if(_cameraShake == null)
+            Debug.Log("no Camera Shake or Camera found");
         if(_spawnManager == null)
             Debug.LogError("Spawn Manager not found");
         if(_uiManager == null)
@@ -200,23 +194,6 @@ public class Player : MonoBehaviour
         if (!Input.GetKey(KeyCode.LeftShift) && _thrusterFuel < _maxThrusterFuel)
             _thrusterFuel += 1f * Time.deltaTime;
     }
-    private void ShakeCamera()
-    {
-        InvokeRepeating(nameof(StartShakeCamera), 0f, 0.005f);
-        Invoke(nameof(StopShakeCamera), _shakeTime);
-    }
-    private void StartShakeCamera()
-    {
-        var transformPosition = _mainCamera.transform.position;
-        transformPosition.x += Random.value * _shakeMagnitude * 2 - _shakeMagnitude;
-        transformPosition.y += Random.value * _shakeMagnitude * 2 - _shakeMagnitude;
-        _mainCamera.transform.position = transformPosition;
-    }
-    private void StopShakeCamera()
-    {
-        CancelInvoke("StartShakeCamera");
-        _mainCamera.transform.position = _cameraInitialPosition;
-    }
 
     //public methods
     public void EnemyHit(int points)
@@ -233,7 +210,7 @@ public class Player : MonoBehaviour
             return;
         }
         
-        ShakeCamera();
+        _cameraShake.ShakeCamera();
         _lives -= 1;
         _uiManager.UpdateLives(_lives);
 
