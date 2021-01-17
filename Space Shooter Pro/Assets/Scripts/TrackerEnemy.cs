@@ -36,10 +36,18 @@ public class TrackerEnemy : MonoBehaviour
     {
         transform.Translate(Vector3.down * (_speed * Time.deltaTime));
 
-        if (transform.position.y < -6.0f)
-            transform.position = new Vector3(Random.Range(-9.0f, 9.0f), 7.0f);
+        KeepInBorder();
     }
 
+    private void KeepInBorder()
+    {
+        if (transform.position.y < -6.0f)
+            transform.position = new Vector3(Random.Range(-9.0f, 9.0f), 7.0f);
+        if (transform.position.x < -9.0f)
+            transform.position = new Vector3(-9.0f, transform.position.y);
+        else if (transform.position.x > 9.0f)
+            transform.position = new Vector3(9.0f, transform.position.y);
+    }
     private void RandomSpawnShield()
     {
         var randShieldSpawn = Random.Range(0, 100);
@@ -97,9 +105,9 @@ public class TrackerEnemy : MonoBehaviour
     {
         while (_speed > 0)
         {
-            var direction = new Vector3(_player.transform.position.x - Random.Range(-1f,1f),transform.position.y);
-            transform.position = direction;
-            yield return new WaitForSeconds(0.2f);
+            var direction = new Vector3(_player.transform.position.x,0);
+            transform.Translate(direction * Time.deltaTime);
+            yield return null;
         }
     }
 }

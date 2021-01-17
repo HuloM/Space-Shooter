@@ -1,7 +1,11 @@
 using System;
 using System.Collections;
+using System.Numerics;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 [RequireComponent(typeof(AudioSource))]
 public class Enemy : MonoBehaviour
@@ -10,7 +14,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float _speed = 4.0f;
     [SerializeField] private GameObject _enemyLaserPrefab;
     [SerializeField] private GameObject _enemyShield;
-
+    [SerializeField] private Vector2 _raycaster;
+    
     private const int SpawnShieldChance = 33;
     
     private Player _player;
@@ -32,6 +37,7 @@ public class Enemy : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
 
         RandomSpawnShield();
+        _raycaster = -Vector2.up * 5;
     }
 
     private void Update()
@@ -40,6 +46,21 @@ public class Enemy : MonoBehaviour
 
         if (Time.time > _canFire && !_isHit)
         {
+            FireLaser();
+        }
+        
+        TargetPowerUp();
+    }
+
+    private void TargetPowerUp()
+    {
+        Debug.DrawRay(transform.position, _raycaster, Color.white);
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, _raycaster);
+
+        if (hit.transform.CompareTag("PowerUp"))
+        {
+            Debug.Log("powerup located");
             FireLaser();
         }
     }
