@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(AudioSource))]
 public class Enemy : MonoBehaviour
@@ -51,14 +53,29 @@ public class Enemy : MonoBehaviour
     {
         transform.Translate(Vector3.down * (_speed * Time.deltaTime));
         StartCoroutine(MoveSideToSide());
-        
-        
+        KeepInBorder();
+
+        if (Math.Abs(transform.position.y - _player.transform.position.y) < 1.5f &&
+            Math.Abs(transform.position.x - _player.transform.position.x) < 2f)
+            Ram();
+    }
+
+    private void KeepInBorder()
+    {
         if (transform.position.y < -6.0f)
             transform.position = new Vector3(Random.Range(-9.0f, 9.0f), 7.0f);
-        if(transform.position.x < -9.0f)
+        if (transform.position.x < -9.0f)
             transform.position = new Vector3(-9.0f, transform.position.y);
-        else if(transform.position.x  > 9.0f)
+        else if (transform.position.x > 9.0f)
             transform.position = new Vector3(9.0f, transform.position.y);
+    }
+
+    private void Ram()
+    {
+        StopCoroutine(MoveSideToSide());
+        var direction = _player.transform.position - transform.position;
+        transform.Translate(direction * (_speed * Time.deltaTime));
+        
     }
 
     private void RandomSpawnShield()
