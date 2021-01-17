@@ -8,15 +8,34 @@ public class Powerup : MonoBehaviour
     [SerializeField] private float _speed = 2f;
     [SerializeField] private PowerupID _powerupID; //0 = tripleShot, 1 = speed, 2 = shield
     [SerializeField] private AudioClip _powerupClip;
+    private GameObject _player;
+
+    private void Start()
+    {
+        _player = GameObject.FindGameObjectWithTag("Player");
+        if(_player == null)
+            Debug.Log("player not found");
+    }
 
     private void Update()
-    { 
-        transform.Translate(Vector3.down * (Time.deltaTime * _speed));
-       
-       if(transform.position.y < -6f)
-           Destroy(gameObject);
-        
+    {
+        CalculateMovement();
+
+        if(transform.position.y < -6f)
+            Destroy(gameObject);
     }
+
+    private void CalculateMovement()
+    {
+        if (Input.GetKey(KeyCode.C))
+        {
+            var direction = _player.transform.position - transform.position;
+            transform.Translate(direction * Time.deltaTime);
+        }
+        else
+            transform.Translate(Vector3.down * (Time.deltaTime * _speed));
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))

@@ -38,8 +38,8 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/SpawnManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Laser.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/TrackerEnemy.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Powerup.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Enemy.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Powerup.cs" />
       </list>
     </option>
   </component>
@@ -120,7 +120,7 @@
       <workItem from="1610250914342" duration="3779000" />
       <workItem from="1610335010749" duration="2880000" />
       <workItem from="1610409647423" duration="2709000" />
-      <workItem from="1610914175551" duration="2316000" />
+      <workItem from="1610914175551" duration="2771000" />
     </task>
     <servers />
   </component>
