@@ -8,11 +8,11 @@ public class Powerup : MonoBehaviour
     [SerializeField] private float _speed = 2f;
     [SerializeField] private PowerupID _powerupID; //0 = tripleShot, 1 = speed, 2 = shield
     [SerializeField] private AudioClip _powerupClip;
-    private GameObject _player;
+    private Player _player;
 
     private void Start()
     {
-        _player = GameObject.FindGameObjectWithTag("Player");
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         if(_player == null)
             Debug.Log("player not found");
     }
@@ -40,41 +40,40 @@ public class Powerup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Player player = other.GetComponent<Player>();
-            if (player != null)
+            if (_player != null)
             {
                 switch (_powerupID)
                 {
                     case PowerupID.TripleShot:
-                        player.OnTripleShotPickup();
+                        _player.OnTripleShotPickup();
                         Debug.Log("triple shot collected");
                         break;
                     case PowerupID.Speed:
-                        player.OnSpeedPickup(2f);
+                        _player.OnSpeedPickup(2f);
                         Debug.Log("speed collected");
                         break;
                     case PowerupID.Shield:
-                        player.OnShieldPickup();
+                        _player.OnShieldPickup();
                         Debug.Log("shield collected");
                         break;
                     case PowerupID.AmmoRefill:
-                        player.OnAmmoRefillPickup();
+                        _player.OnAmmoRefillPickup();
                         Debug.Log("ammo refill collected");
                         break;
                     case PowerupID.Heal:
-                        player.OnHealPickup();
+                        _player.OnHealPickup();
                         Debug.Log("heal collected");
                         break;
                     case PowerupID.MultiShot:
-                        player.OnMultiShotPickup();
+                        _player.OnMultiShotPickup();
                         Debug.Log("multi shot collected");
                         break;
                     case PowerupID.NegativeHeal:
-                        player.Damage();
+                        _player.Damage();
                         Debug.Log("negative heal collected");
                         break;
                     case PowerupID.NegativeSpeed:
-                        player.OnSpeedPickup(0.5f);
+                        _player.OnSpeedPickup(0.5f);
                         Debug.Log("negative speed collected");
                         break;
                     default:

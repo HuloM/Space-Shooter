@@ -1,11 +1,7 @@
 using System;
 using System.Collections;
-using System.Numerics;
 using UnityEngine;
-using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
 
 [RequireComponent(typeof(AudioSource))]
 public class Enemy : MonoBehaviour
@@ -116,39 +112,31 @@ public class Enemy : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-            Player player = other.GetComponent<Player>();
 
-            if (player != null)
-                player.Damage();
-
-            if (_hasShield)
+            if (_player != null)
             {
-                _hasShield = false;
-                _enemyShield.SetActive(false);
-                return;
-            }
-            
-            if(player != null)
+                _player.Damage();
                 OnEnemyHit();
+            }
         }
-        
+
         if (other.CompareTag("Laser"))
         {
             Destroy(other.gameObject);
 
-            if (_hasShield)
-            {
-                _hasShield = false;
-                _enemyShield.SetActive(false);
-                return;
-            }
-            
             OnEnemyHit();
         }
     }
 
     private void OnEnemyHit()
     {
+        if (_hasShield)
+        {
+            _hasShield = false;
+            _enemyShield.SetActive(false);
+            return;
+        }
+        
         _player.EnemyHit(Random.Range(5, 15));
         _animator.SetTrigger("OnDestroy");
         _speed = 0;
