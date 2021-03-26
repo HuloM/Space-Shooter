@@ -22,8 +22,13 @@
         <e p="Scripts" t="Include">
           <e p="Astroid.cs" t="Include" />
           <e p="CameraShake.cs" t="Include" />
-          <e p="Enemy.cs" t="Include" />
-          <e p="EnemyLaser.cs" t="Include" />
+          <e p="Enemy" t="Include">
+            <e p="Enemy.cs" t="Include" />
+            <e p="EnemyLaser.cs" t="Include" />
+            <e p="EnemySmartLaser.cs" t="Include" />
+            <e p="SmartEnemy.cs" t="Include" />
+            <e p="TrackerEnemy.cs" t="Include" />
+          </e>
           <e p="EnemyWaveIndex.cs" t="Include" />
           <e p="Explosion.cs" t="Include" />
           <e p="GameManager.cs" t="Include" />
@@ -35,7 +40,6 @@
           <e p="Powerup.cs" t="Include" />
           <e p="PowerupID.cs" t="Include" />
           <e p="SpawnManager.cs" t="Include" />
-          <e p="TrackerEnemy.cs" t="Include" />
           <e p="UIManager.cs" t="Include" />
         </e>
       </e>

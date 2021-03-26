@@ -15,7 +15,6 @@ public class SpawnManager : MonoBehaviour
     private bool _stopSpawningEnemies = false;
     private bool _stopSpawningPowerups = false;
     private int enemiesSpawned;
-    private const int TrackerSpawnChance = 33;
     private readonly int[] _powerupLootTable =
     {
         25, //25 for ammo           index = 0
@@ -28,6 +27,12 @@ public class SpawnManager : MonoBehaviour
         5    //5 for damage         index = 7
     };
 
+    private readonly int[] _enemyLootTable =
+    {
+        70, //70 for normal         index = 0
+        25, //25 for tracker        index = 1
+        5 //5 for smart          index = 3 
+    };
     public int enemiesKilled;
     
     public void StartSpawnSequence()
@@ -48,7 +53,7 @@ public class SpawnManager : MonoBehaviour
             
             while (enemiesSpawned < 5 * ((int) _waveIndex + 1))
             {
-                SpawnRandomEnemy();
+                SpawnRandomEntityFromLootTable(_enemyLootTable, _enemyPrefabs);
                 yield return new WaitForSeconds(1f);
             }
 
@@ -63,53 +68,42 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    private void SpawnRandomEnemy()
-    {
-        Vector3 posToSpawn = new Vector3(Random.Range(-9.0f, 9.0f), 7f);
-        var randEnemy = Random.Range(0, 100);
-
-        //33% to spawn tracker
-        var enemy = Instantiate(randEnemy <= TrackerSpawnChance ? _enemyPrefabs[1] : _enemyPrefabs[0], posToSpawn, Quaternion.identity);
-        enemy.transform.parent = _enemyContainer.transform;
-
-        enemiesSpawned++;
-    }
-
     IEnumerator SpawnPowerupRoutine()
     {
         yield return new WaitForSeconds(3f);
         while (_stopSpawningPowerups == false)
         {
-            SpawnRandomPowerup();
+            SpawnRandomEntityFromLootTable(_powerupLootTable, _powerupPrefabs);
 
             yield return new WaitForSeconds(Random.Range(8.0f, 16.0f));
         }
     }
-
-    private void SpawnRandomPowerup()
+    private void SpawnRandomEntityFromLootTable(int[] lootTable, GameObject[] prefabs)
     {
         Vector3 posToSpawn = new Vector3(Random.Range(-9.0f, 9.0f), 7f);
-        int powerupToSpawn = 0;
+        int entityToSpawn = 0;
         int total = 0;
 
-        foreach (var item in _powerupLootTable)
+        foreach (var item in lootTable)
         {
             total += item;
         }
-        var randPowerup = Random.Range(0, total);
+        var randEntity = Random.Range(0, total); 
         
-        for (int i = 0; i < _powerupLootTable.Length; i++)
+        for (int i = 0; i < lootTable.Length; i++)
         {
-            if (randPowerup <= _powerupLootTable[i])
+            if (randEntity <= lootTable[i])
             {
-                powerupToSpawn = i;
-                Debug.Log("spawning: " + _powerupPrefabs[i].name);
+                entityToSpawn = i;
+                Debug.Log("spawning: " + prefabs[i].name);
                 break;
             }
-            randPowerup -= _powerupLootTable[i];
+            randEntity -= lootTable[i];
         }
         
-        var powerup = Instantiate(_powerupPrefabs[powerupToSpawn], posToSpawn, Quaternion.identity);
+        var entity = Instantiate(prefabs[entityToSpawn], posToSpawn, Quaternion.identity);
+
+        entity.gameObject.transform.parent = _enemyContainer.transform;
     }
 
     public void OnPlayerDeath()

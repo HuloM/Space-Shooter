@@ -105,8 +105,8 @@ public class TrackerEnemy : MonoBehaviour
     {
         while (_speed > 0)
         {
-            var direction = new Vector3(_player.transform.position.x,0);
-            transform.Translate(direction * Time.deltaTime);
+            var direction = new Vector3(_player.transform.position.x,transform.position.y);
+            transform.position = Vector3.Lerp(transform.position, direction, 0.1f);
             yield return null;
         }
     }
