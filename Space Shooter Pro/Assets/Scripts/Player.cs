@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _laserPrefab;
     [SerializeField] private GameObject _tripleShotPrefab;
     [SerializeField] private GameObject _multiShotPrefab;
+    [SerializeField] private GameObject _homingShotPrefab;
     [SerializeField] private float _fireRate = 0.5f;
     [SerializeField] private int _lives = 3;
     [SerializeField] private GameObject _shieldVisual;
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour
     private float _initialSpeed;
     private bool _isTripleShotEnabled = false;
     private bool _isMultiShotEnabled = false;
+    private bool _isHomingShotEnabled = false;
     private int _shieldStrength;
     private int _ammoCount;
     private int _maxAmmoCount;
@@ -68,7 +70,6 @@ public class Player : MonoBehaviour
             FireLaser();
 
         Refuel();
-
     }
 
     //private methods
@@ -99,6 +100,8 @@ public class Player : MonoBehaviour
             Instantiate(_tripleShotPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
         else if (_isMultiShotEnabled)
             Instantiate(_multiShotPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
+        else if (_isHomingShotEnabled)
+            Instantiate(_homingShotPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
         else
             Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
         
@@ -162,6 +165,9 @@ public class Player : MonoBehaviour
             case PowerupID.MultiShot:
                 _isMultiShotEnabled = false;
                 break;
+            case PowerupID.HomingShot:
+                _isHomingShotEnabled = false;
+                break;
             case PowerupID.Speed:
                 _speed = _initialSpeed;
                 break;
@@ -221,6 +227,16 @@ public class Player : MonoBehaviour
         _isTripleShotEnabled = true;
         StartCoroutine(PowerupPowerDownRoutine(PowerupID.TripleShot, 4f));
     }
+    public void OnMultiShotPickup()
+    {
+        _isMultiShotEnabled = true;
+        StartCoroutine(PowerupPowerDownRoutine(PowerupID.MultiShot, 5f));
+    }
+    public void OnHomingShotPickup()
+    {
+        _isHomingShotEnabled = true;
+        StartCoroutine(PowerupPowerDownRoutine(PowerupID.HomingShot, 4f));
+    }
     public void OnSpeedPickup(float speedMultiplier)
     {
         _speed *= speedMultiplier;
@@ -248,11 +264,6 @@ public class Player : MonoBehaviour
         }
         else
             Debug.Log("max lives reached");
-    }
-    public void OnMultiShotPickup()
-    {
-        _isMultiShotEnabled = true;
-        StartCoroutine(PowerupPowerDownRoutine(PowerupID.MultiShot, 5f));
     }
     
     

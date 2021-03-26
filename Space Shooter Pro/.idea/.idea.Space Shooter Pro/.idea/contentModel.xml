@@ -32,6 +32,7 @@
           <e p="EnemyWaveIndex.cs" t="Include" />
           <e p="Explosion.cs" t="Include" />
           <e p="GameManager.cs" t="Include" />
+          <e p="HomingLaser.cs" t="Include" />
           <e p="Laser.cs" t="Include" />
           <e p="Main Menu" t="Include">
             <e p="MainMenu.cs" t="Include" />

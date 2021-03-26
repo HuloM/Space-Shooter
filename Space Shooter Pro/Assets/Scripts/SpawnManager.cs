@@ -17,21 +17,22 @@ public class SpawnManager : MonoBehaviour
     private int enemiesSpawned;
     private readonly int[] _powerupLootTable =
     {
-        25, //25 for ammo           index = 0
+        20, //20 for ammo           index = 0
         20, //20 for speed          index = 1
         13, //13 for triple shot    index = 2
         12, //12 for shield         index = 3
         10, //10 for half speed     index = 4
         8,   //8 for heal           index = 5
         7,   //7 for multi shot     index = 6
-        5    //5 for damage         index = 7
+        5,   //5 for damage         index = 7
+        5    //5 for homing         index = 8
     };
 
     private readonly int[] _enemyLootTable =
     {
         70, //70 for normal         index = 0
         25, //25 for tracker        index = 1
-        5 //5 for smart          index = 3 
+        5    //5 for smart          index = 2 
     };
     public int enemiesKilled;
     

@@ -68,6 +68,10 @@ public class Powerup : MonoBehaviour
                         _player.OnMultiShotPickup();
                         Debug.Log("multi shot collected");
                         break;
+                    case PowerupID.HomingShot:
+                        _player.OnHomingShotPickup();
+                        Debug.Log("Homing Shot collected");
+                        break;
                     case PowerupID.NegativeHeal:
                         _player.Damage();
                         Debug.Log("negative heal collected");

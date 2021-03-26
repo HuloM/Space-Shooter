@@ -8,4 +8,5 @@
     MultiShot,
     NegativeHeal,
     NegativeSpeed,
+    HomingShot,
 }

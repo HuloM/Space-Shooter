@@ -6,6 +6,9 @@ public class Laser : MonoBehaviour
     [SerializeField] private float _speed = 8.0f;
     [SerializeField] private bool _isEnemyLaser;
     [SerializeField] private bool _isPlayerLaser;
+    
+    
+    
     private GameObject _player;
     private Rigidbody2D _rb;
     private void Start()
