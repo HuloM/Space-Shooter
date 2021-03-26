@@ -30,8 +30,8 @@ public class SpawnManager : MonoBehaviour
 
     private readonly int[] _enemyLootTable =
     {
-        70, //70 for normal         index = 0
-        25, //25 for tracker        index = 1
+        80, //70 for normal         index = 0
+        15, //25 for tracker        index = 1
         5    //5 for smart          index = 2 
     };
     public int enemiesKilled;
@@ -55,6 +55,7 @@ public class SpawnManager : MonoBehaviour
             while (enemiesSpawned < 5 * ((int) _waveIndex + 1))
             {
                 SpawnRandomEntityFromLootTable(_enemyLootTable, _enemyPrefabs);
+                enemiesSpawned++;
                 yield return new WaitForSeconds(1f);
             }
 

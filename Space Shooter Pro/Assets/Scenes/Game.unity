@@ -760,6 +760,7 @@ MonoBehaviour:
   _enemyPrefabs:
   - {fileID: 1011955074968170763, guid: 543cd16c8c04aa04e895c1b57bb09ac1, type: 3}
   - {fileID: 7951043626151600893, guid: 78332fec2c3d62840816032dfcd160b4, type: 3}
+  - {fileID: 4443499544716157823, guid: a022e823ea2e8d64e9bc9ee51f0465da, type: 3}
   _enemyContainer: {fileID: 1104217562}
   _powerupPrefabs:
   - {fileID: 9171729468405467113, guid: aa6368c4e3876f74bb92966391375e9b, type: 3}
@@ -1366,7 +1367,7 @@ GameObject:
   - component: {fileID: 1104217563}
   m_Layer: 0
   m_Name: Enemy Container
-  m_TagString: Untagged
+  m_TagString: EnemyContainer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

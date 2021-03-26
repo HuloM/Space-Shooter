@@ -146,4 +146,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 8
   _isPlayerLaser: 0
-  _enemyPool: []
+  _enemyPool: {fileID: 0}

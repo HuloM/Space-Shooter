@@ -7,22 +7,26 @@ public class HomingLaser : MonoBehaviour
     //speed variable of 8
     [SerializeField] private float _speed = 8.0f;
     [SerializeField] private bool _isPlayerLaser;
-    [SerializeField] private GameObject[] _enemyPool;
+    [SerializeField] private GameObject _enemyPool;
 
     private Transform[] _enemyTransforms;
     private Transform _target;
     private void Start()
     {
+        _enemyPool = GameObject.FindGameObjectWithTag("EnemyContainer");
         if(_enemyPool != null)
-        { 
+        {
             var count = 0;
-            foreach (var obj in _enemyPool)
+            foreach (Transform child in _enemyPool.transform)
             {
-                _enemyTransforms[count] = obj.transform;
+                _enemyTransforms[count] = child;
                 count++;
             }
+
+            _target = GetClosestEnemy(_enemyTransforms);
         }
-        _target = GetClosestEnemy(_enemyTransforms);
+        else
+            Debug.Log("unexpected error: could not find any enemies to home");
     }
 
     private void Update()
