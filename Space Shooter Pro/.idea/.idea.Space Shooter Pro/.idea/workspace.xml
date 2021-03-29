@@ -21,11 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="28d4f51a-a901-4631-8415-9bf8cfd50712" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Space Shooter Pro/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Space Shooter Pro/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Homing_Shot.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Homing_Shot.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HomingLaser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HomingLaser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SpawnManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SpawnManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemySmartLaser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemySmartLaser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/SmartEnemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/SmartEnemy.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,14 +58,14 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Enemy.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/TrackerEnemy.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Enemy/Enemy.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Enemy/SmartEnemy.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemySmartLaser.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PowerupID.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Powerup.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Laser.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/HomingLaser.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SpawnManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Enemy/SmartEnemy.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemySmartLaser.cs" />
       </list>
     </option>
   </component>
@@ -153,7 +150,8 @@
       <workItem from="1610914175551" duration="3271000" />
       <workItem from="1611701962240" duration="710000" />
       <workItem from="1611872605998" duration="347000" />
-      <workItem from="1616784404690" duration="5991000" />
+      <workItem from="1616784404690" duration="6307000" />
+      <workItem from="1616985656016" duration="296000" />
     </task>
     <servers />
   </component>
@@ -172,6 +170,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />

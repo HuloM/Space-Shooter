@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySmartLaser : MonoBehaviour
@@ -14,36 +12,24 @@ public class EnemySmartLaser : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player");
         gameObject.GetComponent<AudioSource>().Play();
 
-        _timeToDestroy = 2.0f;
+        _timeToDestroy = 1.0f;
     }
 
     private void Update()
     {
+        var targetPos = _player.transform.position;
+        var position = transform.position;
+        
         var step = _speed * Time.deltaTime;
-        
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, 
-            _player.transform.rotation, step);
-        
-        transform.position = Vector3.MoveTowards(transform.position, _player.transform.position, step);
+        var offset = targetPos - position;
+
+        transform.rotation = Quaternion.LookRotation(Vector3.forward, offset);
+        position = Vector3.MoveTowards(position, targetPos, step);
+        transform.position = position;
 
         _timeToDestroy -= Time.deltaTime;
         
         if(transform.position.y < -6f || _timeToDestroy <= 0)
             Destroy(gameObject);
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log("hit: " + other.transform.name);
-
-        if (other.CompareTag("Player"))
-        {
-            Player player = other.GetComponent<Player>();
-
-            if (player != null)
-                player.Damage();
-            
-            Destroy(gameObject);
-        }
     }
 }
