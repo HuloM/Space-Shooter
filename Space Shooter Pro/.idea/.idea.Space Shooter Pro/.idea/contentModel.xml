@@ -23,6 +23,7 @@
           <e p="Astroid.cs" t="Include" />
           <e p="CameraShake.cs" t="Include" />
           <e p="Enemy" t="Include">
+            <e p="BossEnemy.cs" t="Include" />
             <e p="Enemy.cs" t="Include" />
             <e p="EnemyLaser.cs" t="Include" />
             <e p="EnemySmartLaser.cs" t="Include" />

@@ -3,4 +3,5 @@
     wave01,
     wave02,
     wave03,
+    waveBoss
 }

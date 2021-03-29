@@ -20,9 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="28d4f51a-a901-4631-8415-9bf8cfd50712" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Space Shooter Pro/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Space Shooter Pro/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Space Shooter Pro/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Space Shooter Pro/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemySmartLaser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemySmartLaser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/SmartEnemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/SmartEnemy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Enemy/Boss Enemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemy/Boss Enemy.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/EnemyWaveIndex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/EnemyWaveIndex.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SpawnManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SpawnManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +36,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Enemy/BossEnemy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Laser.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Astroid.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Enemy/SmartEnemy.cs" root0="FORCE_HIGHLIGHTING" />
@@ -63,9 +67,11 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Player.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Laser.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/HomingLaser.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/SpawnManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Enemy/SmartEnemy.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemySmartLaser.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/EnemyWaveIndex.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/SpawnManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Enemy/BossEnemy.cs" />
       </list>
     </option>
   </component>
@@ -151,7 +157,7 @@
       <workItem from="1611701962240" duration="710000" />
       <workItem from="1611872605998" duration="347000" />
       <workItem from="1616784404690" duration="6307000" />
-      <workItem from="1616985656016" duration="296000" />
+      <workItem from="1616985656016" duration="1752000" />
     </task>
     <servers />
   </component>
@@ -180,10 +186,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="92" y="92" width="1736" height="896" key="DiffContextDialog/0.0.1920.1080/-1920.156.1920.1080/1920.-629.1080.1920@0.0.1920.1080" timestamp="1616784783841" />
-    <state x="616" y="250" key="run.anything.popup" timestamp="1610085554081">
+    <state x="616" y="250" key="run.anything.popup" timestamp="1616986182838">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="616" y="250" key="run.anything.popup/0.0.1920.1080/-1920.156.1920.1080/1920.-629.1080.1920@0.0.1920.1080" timestamp="1610085554081" />
+    <state x="616" y="250" key="run.anything.popup/0.0.1920.1080/-1920.156.1920.1080/1920.-629.1080.1920@0.0.1920.1080" timestamp="1616986182838" />
     <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1616787271211">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

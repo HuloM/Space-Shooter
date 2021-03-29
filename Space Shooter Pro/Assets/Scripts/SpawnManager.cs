@@ -10,10 +10,12 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject[] _enemyPrefabs;
     [SerializeField] private GameObject _enemyContainer;
     [SerializeField] private GameObject[] _powerupPrefabs;
+    [SerializeField] private GameObject _bossEnemy;
 
     private EnemyWaveIndex _waveIndex;
     private bool _stopSpawningEnemies = false;
     private bool _stopSpawningPowerups = false;
+    private bool _bossSpawned = false;
     private int enemiesSpawned;
     private readonly int[] _powerupLootTable =
     {
@@ -67,6 +69,15 @@ public class SpawnManager : MonoBehaviour
             }
 
             yield return new WaitForSeconds(5.0f);
+        }
+
+        if (_stopSpawningEnemies && _waveIndex == EnemyWaveIndex.waveBoss && _bossSpawned == false)
+        {
+            var posToSpawn = new Vector3(0.0f, 11.0f, 0.0f);
+            var entity = Instantiate(_bossEnemy, posToSpawn, Quaternion.identity);
+
+            entity.gameObject.transform.parent = _enemyContainer.transform;
+            _bossSpawned = true;
         }
     }
 
