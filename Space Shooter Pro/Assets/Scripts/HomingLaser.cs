@@ -32,7 +32,6 @@ public class HomingLaser : MonoBehaviour
     private void CalculateMovement()
     {
         var position = transform.position;
-        
         var step = _speed * Time.deltaTime;
 
         if (_nearestEnemy != null)

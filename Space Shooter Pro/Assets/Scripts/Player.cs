@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject[] _EngineDamage;
     [SerializeField] private GameObject _explosionPrefab;
     [SerializeField] private AudioClip _laserShotClip;
+    [SerializeField] private GameObject _thruster;
     
     //private variables
     private AudioSource _audioSource;
@@ -76,8 +77,13 @@ public class Player : MonoBehaviour
     private void CalculateMovement(int speedMultiplier)
     {
         if (speedMultiplier > 1)
+        {
             _thrusterFuel -= 2f * Time.deltaTime;
-
+            _thruster.SetActive(true);
+        }
+        else
+            _thruster.SetActive(false);
+        
         _uiManager.updateThrusterFuel(_thrusterFuel);
         
         float horizontalInput = Input.GetAxis("Horizontal");
