@@ -54,10 +54,13 @@ public class Enemy : MonoBehaviour
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, _raycaster);
 
-        if (hit.transform.CompareTag("PowerUp"))
+        if(hit != null)
         {
-            Debug.Log("powerup located");
-            FireLaser();
+            if (hit.transform.CompareTag("PowerUp"))
+            {
+                Debug.Log("powerup located");
+                FireLaser();
+            }
         }
     }
 

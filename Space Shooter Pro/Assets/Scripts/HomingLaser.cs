@@ -6,27 +6,22 @@ public class HomingLaser : MonoBehaviour
 {
     //speed variable of 8
     [SerializeField] private float _speed = 8.0f;
-    [SerializeField] private bool _isPlayerLaser;
-    [SerializeField] private GameObject _enemyPool;
+    [SerializeField] private Transform _player;
+    [SerializeField] private float _overlapRadius = 10.0f;
 
-    private Transform[] _enemyTransforms;
-    private Transform _target;
+    private Transform _nearestEnemy;
+    private int _enemyLayer;
     private void Start()
     {
-        _enemyPool = GameObject.FindGameObjectWithTag("EnemyContainer");
-        if(_enemyPool != null)
-        {
-            var count = 0;
-            foreach (Transform child in _enemyPool.transform)
-            {
-                _enemyTransforms[count] = child;
-                count++;
-            }
-
-            _target = GetClosestEnemy(_enemyTransforms);
-        }
-        else
-            Debug.Log("unexpected error: could not find any enemies to home");
+        _player = FindObjectOfType<Player>().transform;
+        
+        if(_player == null)
+            Debug.Log("no player found");
+        
+        _enemyLayer = LayerMask.NameToLayer("Enemy");
+        Debug.Log(_enemyLayer);
+        
+        FindClosestEnemy();
     }
 
     private void Update()
@@ -36,34 +31,41 @@ public class HomingLaser : MonoBehaviour
 
     private void CalculateMovement()
     {
+        var position = transform.position;
+        
         var step = _speed * Time.deltaTime;
+
+        if (_nearestEnemy != null)
+        {
+            var targetPos = _nearestEnemy.position;
+            var offset = targetPos - position;
+            transform.position = Vector3.MoveTowards(position, targetPos, step);
+            transform.rotation = Quaternion.LookRotation(Vector3.forward, offset);
+        }
+        else
+            transform.Translate(Vector3.up * (_speed * Time.deltaTime));
         
-        if(_target != null)
-            transform.position = Vector3.MoveTowards(transform.position, _target.position, step);
-        
-        if (transform.position.y > 8.0f || transform.position.y < -6.0f)
+        if (position.y > 8.0f || position.y < -6.0f)
         {
             if (transform.parent != null)
                 Destroy(transform.parent.gameObject);
             Destroy(gameObject);
         }
     }
-    Transform GetClosestEnemy (Transform[] enemies)
+
+    private void FindClosestEnemy()
     {
-        Transform bestTarget = null;
-        float closestDistanceSqr = Mathf.Infinity;
-        Vector3 currentPosition = transform.position;
-        foreach(Transform potentialTarget in enemies)
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(_player.position, _overlapRadius, 1 << _enemyLayer);
+        float minDist = Mathf.Infinity;
+
+        foreach (var hitCollider in hitColliders)
         {
-            Vector3 directionToTarget = potentialTarget.position - currentPosition;
-            float dSqrToTarget = directionToTarget.sqrMagnitude;
-            if(dSqrToTarget < closestDistanceSqr)
+            float dist = Vector2.Distance(_player.position, hitCollider.transform.position);
+            if (dist < minDist)
             {
-                closestDistanceSqr = dSqrToTarget;
-                bestTarget = potentialTarget;
+                minDist = dist;
+                _nearestEnemy = hitCollider.transform;
             }
         }
-     
-        return bestTarget;
     }
 }

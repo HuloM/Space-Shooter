@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3440351317727827751}
   - component: {fileID: 5764038922844080891}
   - component: {fileID: 2080051801272214226}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -52,6 +52,7 @@ MonoBehaviour:
   _speed: 2
   _enemyLaserPrefab: {fileID: 704054997758625505, guid: f0583d69fb607de44aadeb51bb16b828, type: 3}
   _enemyShield: {fileID: 5329384367526151475}
+  _raycaster: {x: 0, y: 0}
 --- !u!212 &4550111073085844250
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -319,6 +320,10 @@ PrefabInstance:
     - target: {fileID: 6255720857145874735, guid: 08916f4d3e0188e40b28bdc2a79db2f2, type: 3}
       propertyPath: m_Name
       value: Enemy_Shield
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255720857145874735, guid: 08916f4d3e0188e40b28bdc2a79db2f2, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6255720857145874735, guid: 08916f4d3e0188e40b28bdc2a79db2f2, type: 3}
       propertyPath: m_IsActive

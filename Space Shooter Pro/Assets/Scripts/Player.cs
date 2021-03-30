@@ -235,7 +235,7 @@ public class Player : MonoBehaviour
     public void OnHomingShotPickup()
     {
         _isHomingShotEnabled = true;
-        StartCoroutine(PowerupPowerDownRoutine(PowerupID.HomingShot, 4f));
+        StartCoroutine(PowerupPowerDownRoutine(PowerupID.HomingShot, 3f));
     }
     public void OnSpeedPickup(float speedMultiplier)
     {

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3432056372263541005}
   - component: {fileID: 8971508961265725732}
   - component: {fileID: 7951043626151600894}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tracker_Enemy_temp
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -273,6 +273,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7951043626151600769}
     m_Modifications:
+    - target: {fileID: 3927282673785868255, guid: 38e50c9017702ea4cb4aeb598c8f3a3f, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3927282674502430648, guid: 38e50c9017702ea4cb4aeb598c8f3a3f, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6075050971599605242, guid: 38e50c9017702ea4cb4aeb598c8f3a3f, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -320,6 +328,10 @@ PrefabInstance:
     - target: {fileID: 6075050971599605243, guid: 38e50c9017702ea4cb4aeb598c8f3a3f, type: 3}
       propertyPath: m_Name
       value: Tracker_Laser_Cage
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075050971599605243, guid: 38e50c9017702ea4cb4aeb598c8f3a3f, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38e50c9017702ea4cb4aeb598c8f3a3f, type: 3}
@@ -387,6 +399,10 @@ PrefabInstance:
     - target: {fileID: 6255720857145874735, guid: 08916f4d3e0188e40b28bdc2a79db2f2, type: 3}
       propertyPath: m_Name
       value: Enemy_Shield
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255720857145874735, guid: 08916f4d3e0188e40b28bdc2a79db2f2, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6255720857145874735, guid: 08916f4d3e0188e40b28bdc2a79db2f2, type: 3}
       propertyPath: m_IsActive
