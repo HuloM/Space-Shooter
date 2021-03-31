@@ -349,6 +349,7 @@ MonoBehaviour:
   _explosionPrefab: {fileID: 6056988742329305101, guid: 41ee111ea17ac164cad9d128d77955ec, type: 3}
   _laserShotClip: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
   _thruster: {fileID: 1211814363}
+  _ammoCount: 0
 --- !u!212 &209506230
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -773,6 +774,7 @@ MonoBehaviour:
   - {fileID: 9046769765907748881, guid: 1105f36976955444caae398515046236, type: 3}
   - {fileID: 6413296865479147651, guid: 176bd84e38d679f45b9ff3e150400c4b, type: 3}
   _bossEnemy: {fileID: 4659148181022987586, guid: fbda1d5c8f21f8e41a08fa7b395c115b, type: 3}
+  _waveIndex: 0
   enemiesKilled: 0
 --- !u!1 &502663763
 GameObject:
@@ -2345,67 +2347,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1962857585}
   m_CullTransparentMesh: 1
---- !u!1001 &2043845974
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4659148181022987582, guid: fbda1d5c8f21f8e41a08fa7b395c115b, type: 3}
-      propertyPath: m_RootOrder
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 4659148181022987582, guid: fbda1d5c8f21f8e41a08fa7b395c115b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4659148181022987582, guid: fbda1d5c8f21f8e41a08fa7b395c115b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 4659148181022987582, guid: fbda1d5c8f21f8e41a08fa7b395c115b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4659148181022987582, guid: fbda1d5c8f21f8e41a08fa7b395c115b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4659148181022987582, guid: fbda1d5c8f21f8e41a08fa7b395c115b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4659148181022987582, guid: fbda1d5c8f21f8e41a08fa7b395c115b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4659148181022987582, guid: fbda1d5c8f21f8e41a08fa7b395c115b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4659148181022987582, guid: fbda1d5c8f21f8e41a08fa7b395c115b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4659148181022987582, guid: fbda1d5c8f21f8e41a08fa7b395c115b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4659148181022987582, guid: fbda1d5c8f21f8e41a08fa7b395c115b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4659148181022987586, guid: fbda1d5c8f21f8e41a08fa7b395c115b, type: 3}
-      propertyPath: m_Name
-      value: Boss Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 4659148181022987586, guid: fbda1d5c8f21f8e41a08fa7b395c115b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: fbda1d5c8f21f8e41a08fa7b395c115b, type: 3}
 --- !u!1 &2085369370
 GameObject:
   m_ObjectHideFlags: 0
@@ -2467,7 +2408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5132644490436933742, guid: cd851a2c8f9e3264fb27189c3b04c9c3, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8823145161293693045, guid: cd851a2c8f9e3264fb27189c3b04c9c3, type: 3}
       propertyPath: m_RootOrder

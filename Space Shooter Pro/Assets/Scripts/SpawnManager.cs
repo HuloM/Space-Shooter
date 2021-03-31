@@ -12,7 +12,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject[] _powerupPrefabs;
     [SerializeField] private GameObject _bossEnemy;
 
-    private EnemyWaveIndex _waveIndex;
+    [SerializeField] private EnemyWaveIndex _waveIndex;
     private bool _stopSpawningEnemies = false;
     private bool _stopSpawningPowerups = false;
     private bool _bossSpawned = false;
@@ -49,11 +49,9 @@ public class SpawnManager : MonoBehaviour
     IEnumerator SpawnEnemyRoutine()
     {
         yield return new WaitForSeconds(3f);
+
         while (_stopSpawningEnemies == false)
         {
-            if (_waveIndex > EnemyWaveIndex.wave03)
-                _stopSpawningEnemies = true;
-            
             while (enemiesSpawned < 5 * ((int) _waveIndex + 1))
             {
                 SpawnRandomEntityFromLootTable(_enemyLootTable, _enemyPrefabs);
@@ -63,6 +61,9 @@ public class SpawnManager : MonoBehaviour
 
             if (enemiesKilled >= 5 * ((int) _waveIndex + 1))
             {
+                if (_waveIndex >= EnemyWaveIndex.wave03)
+                    _stopSpawningEnemies = true;
+                
                 enemiesKilled = 0;
                 enemiesSpawned = 0;
                 _waveIndex++;

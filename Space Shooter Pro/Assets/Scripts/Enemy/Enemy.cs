@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour
             FireLaser();
         }
         
-        TargetPowerUp();
+        //TargetPowerUp();
     }
 
     private void TargetPowerUp()
@@ -53,14 +53,11 @@ public class Enemy : MonoBehaviour
         Debug.DrawRay(transform.position, _raycaster, Color.white);
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, _raycaster);
-
-        if(hit != null)
+        
+        if (hit.transform.CompareTag("PowerUp"))
         {
-            if (hit.transform.CompareTag("PowerUp"))
-            {
-                Debug.Log("powerup located");
-                FireLaser();
-            }
+            Debug.Log("powerup located");
+            FireLaser();
         }
     }
 
@@ -95,7 +92,6 @@ public class Enemy : MonoBehaviour
         StopCoroutine(MoveSideToSide());
         var direction = _player.transform.position - transform.position;
         transform.Translate(direction * (_speed * Time.deltaTime));
-        
     }
 
     private void RandomSpawnShield()
@@ -115,7 +111,6 @@ public class Enemy : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-
             if (_player != null)
             {
                 _player.Damage();

@@ -6,11 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private bool _isGameOver;
+    private bool _isGameOverLoss;
+    private bool _isGameOverWon;
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.R) && _isGameOver)
+        if(Input.GetKeyDown(KeyCode.R) && _isGameOverLoss)
             SceneManager.LoadScene(0);
         
         if(Input.GetKeyDown(KeyCode.Escape))
@@ -18,9 +19,12 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void GameOver()
+    public void GameOver(int gameWon)
     {
-        _isGameOver = true;
+        if(gameWon == 0)
+            _isGameOverLoss = true;
+        else if (gameWon == 1)
+            _isGameOverWon = true;
     }
-    
+
 }

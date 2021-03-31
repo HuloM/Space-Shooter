@@ -40,10 +40,10 @@ public class SmartEnemy : MonoBehaviour
 
         if (Time.time > _canFire && !_isHit)
         {
-            //if(_player.gameObject.transform.position.y > transform.position.y)
+            if(_player.gameObject.transform.position.y > transform.position.y)
                 FireLaser(_enemySmartLaserPrefab);
-            //else
-              //  FireLaser(_enemyLaserPrefab);
+            else
+                FireLaser(_enemyLaserPrefab);
         }
     }
 

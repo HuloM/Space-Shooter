@@ -6,9 +6,9 @@ public class Laser : MonoBehaviour
     [SerializeField] private float _speed = 8.0f;
     [SerializeField] private bool _isEnemyLaser;
     [SerializeField] private bool _isPlayerLaser;
-    
-    
-    
+
+
+
     private GameObject _player;
     private Rigidbody2D _rb;
     private void Start()
@@ -29,7 +29,7 @@ public class Laser : MonoBehaviour
     {
         transform.Translate(vector3 * (_speed * Time.deltaTime));
 
-        if (transform.position.y > 8.0f || transform.position.y < -6.0f)
+        if (transform.position.y > 8.0f && _isPlayerLaser || transform.position.y < -6.0f && _isEnemyLaser)
         {
             if (transform.parent != null)
                 Destroy(transform.parent.gameObject);

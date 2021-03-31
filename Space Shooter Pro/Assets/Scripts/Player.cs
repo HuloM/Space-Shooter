@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
     private bool _isMultiShotEnabled = false;
     private bool _isHomingShotEnabled = false;
     private int _shieldStrength;
-    private int _ammoCount;
+    [SerializeField] private int _ammoCount;
     private int _maxAmmoCount;
 
     
@@ -121,7 +121,7 @@ public class Player : MonoBehaviour
             case 0:
                 Instantiate(_explosionPrefab, gameObject.transform.position, Quaternion.identity);
                 _spawnManager.OnPlayerDeath();
-                _uiManager.UpdateGameOver();
+                _uiManager.UpdateGameOverLoss();
                 Destroy(gameObject);
                 break;
             case 1:
@@ -253,7 +253,6 @@ public class Player : MonoBehaviour
         _shieldStrength = 3;
         _shieldVisual.SetActive(true);
         UpdateShieldVisual(_shieldStrength);
-        //StartCoroutine(PowerupPowerDownRoutine(PowerupID.Shield));
     }
     public void OnAmmoRefillPickup()
     {

@@ -43,30 +43,33 @@ public class UIManager : MonoBehaviour
 
     public void UpdateLives(int currentLives)
     {
-        if (_livesImage != null)
+        if (_livesImage != null && currentLives < 3)
             _livesImage.sprite = _liveSprites[currentLives];
     }
 
-    public void UpdateGameOver()
+    public void UpdateGameOverLoss()
     {
-        GameOverSequence();
+        GameOverSequence(0, "YOU LOSE");
+    } 
+    public void UpdateGameOverWon()
+    {
+        GameOverSequence(1, "YOU WIN!!!");
     }
-
-    private void GameOverSequence()
+    private void GameOverSequence(int gameWonNum, string gameWonString)
     {
         _gameOverText.gameObject.SetActive(true);
-        _gameManager.GameOver();
-        StartCoroutine(GameOverFlickerRoutine());
+        _gameManager.GameOver(gameWonNum);
+        StartCoroutine(GameOverFlickerRoutine(gameWonString));
     }
 
-    IEnumerator GameOverFlickerRoutine()
+    IEnumerator GameOverFlickerRoutine(String gameWonString)
     {
         while (true)
         {
             yield return new WaitForSeconds(1f);
             _gameOverText.text = "";
             yield return new WaitForSeconds(1f);
-            _gameOverText.text = "GAME OVER";
+            _gameOverText.text = "GAME OVER: " + gameWonString;
         }
     }
 
