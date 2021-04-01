@@ -18,10 +18,8 @@ public class BossEnemy : MonoBehaviour
     private readonly int[] _weaponTable =
     {
        50,  //fire normal     Index 0
-       20,  //fire explosion  Index 1
        15,  //fire homing     Index 2
-       10,  //fire Max        Index 3
-       5    //fire BulletHell Index 4 
+       10  //fire Max        Index 3
     };
 
     private void Start()

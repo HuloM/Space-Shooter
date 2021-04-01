@@ -12,7 +12,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject[] _powerupPrefabs;
     [SerializeField] private GameObject _bossEnemy;
 
-    [SerializeField] private EnemyWaveIndex _waveIndex;
+    private EnemyWaveIndex _waveIndex;
     private bool _stopSpawningEnemies = false;
     private bool _stopSpawningPowerups = false;
     private bool _bossSpawned = false;

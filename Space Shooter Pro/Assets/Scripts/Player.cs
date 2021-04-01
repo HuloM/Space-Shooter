@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
         _cameraShake = Camera.main.GetComponent<CameraShake>();
 
         _audioSource.clip = _laserShotClip;
-        _maxAmmoCount = _ammoCount = 15;
+        _maxAmmoCount = _ammoCount = 25;
         _maxThrusterFuel = _thrusterFuel = 15;
         _initialSpeed = _speed = 3.5f;
 

@@ -264,7 +264,5 @@ MonoBehaviour:
   _speed: 4
   _weaponPrefabs:
   - {fileID: 2593779238174152139, guid: a24c1b307f5a0e54b8e2d03673e70e10, type: 3}
-  - {fileID: 0}
   - {fileID: 5806887835175280544, guid: ac17ea4f529344d40ba65df7eff4f56d, type: 3}
   - {fileID: 2593779238174152139, guid: ffadd9cda0131d342958f0f56ff241ba, type: 3}
-  - {fileID: 0}
