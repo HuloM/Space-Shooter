@@ -89,7 +89,7 @@ public class SpawnManager : MonoBehaviour
         {
             SpawnRandomEntityFromLootTable(_powerupLootTable, _powerupPrefabs);
 
-            yield return new WaitForSeconds(Random.Range(8.0f, 16.0f));
+            yield return new WaitForSeconds(Random.Range(8.0f, 12.0f));
         }
     }
     private void SpawnRandomEntityFromLootTable(int[] lootTable, GameObject[] prefabs)
